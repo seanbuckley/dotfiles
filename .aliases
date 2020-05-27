@@ -13,6 +13,11 @@ alias distro='cat /etc/*-release'
 # Reload terminal
 alias reload='source ~/.zshrc'
 
+# List files
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
 # Make and enter a directory
 alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
 
