@@ -2,6 +2,8 @@
 # Created by https://www.gitignore.io/api/osx,vue,node,nuxt,hugo,vuejs,react,grunt,linux,nuxtjs,dotenv,direnv,images,jekyll,windows
 # Edit at https://www.gitignore.io/?templates=osx,vue,node,nuxt,hugo,vuejs,react,grunt,linux,nuxtjs,dotenv,direnv,images,jekyll,windows
 
+# Set global .gitignore with `git config --global core.excludesfile '~/.gitignore'` (https://stackoverflow.com/questions/7335420/global-git-ignore)
+
 ### direnv ###
 .direnv
 .envrc
