@@ -26,7 +26,7 @@ alias install="sudo apt install"
 alias uninstall="sudo apt remove --purge"
 
 # System update & upgrade
-alias update='sudo apt update && sudo apt upgrade'
+alias update='sudo apt update && sudo apt upgrade -y'
 
 # Git pull upstrean master
 alias gum="git pull upstream master"
