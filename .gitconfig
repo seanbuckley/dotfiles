@@ -3,7 +3,7 @@
 	smudge = git-lfs smudge %f
 	required = true
 [user]
-	name = willettscontracting
+	name = Sean Buckley
 	email = willettscontracting@users.noreply.github.com
 [credential]
 	helper = manager

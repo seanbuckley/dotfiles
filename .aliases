@@ -34,3 +34,18 @@ alias gum="git pull upstream master"
 # Changed your .gitignore _after_ you have added / committed some files?
 # run `gri` to untrack anything in your updated .gitignore
 alias gri="git ls-files --ignored --exclude-standard | xargs -0 git rm -r"
+
+# Startup a server in your current directory (no npm packages required)
+alias server='python -m SimpleHTTPServer 8000'
+
+# Suffix Aliases
+
+# Open these files in VS Code without typing the `code` command. Just type the filename.
+alias -s azcli=code
+alias -s ps1=code
+alias -s md=code
+alias -s json=code
+alias -s {cs,ts,html}=code
+
+# Clone .git repo by just typing the URL
+alias -s git="git clone"
