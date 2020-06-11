@@ -12,3 +12,7 @@ Personal dot files
 - [ ] .profile
 - [ ] .bashrc
 - [ ] .gitconfig?
+
+## Reference
+
+- [Hacker News - managing dot files](https://news.ycombinator.com/item?id=11070797)
