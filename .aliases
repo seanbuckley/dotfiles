@@ -11,7 +11,9 @@ alias myip="curl http://ipecho.net/plain; echo"
 alias distro='cat /etc/*-release'
 
 # Reload terminal
-alias reload='source ~/.zshrc'
+# alias reload='source ~/.zshrc'
+# Apparenlty this way is better
+alias reload='exec zsh -l'
 
 # List files
 alias ll='ls -alF'
