@@ -1,3 +1,4 @@
+# Windows helpers
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
@@ -5,24 +6,41 @@
 [user]
 	name = Sean Buckley
 	email = seanbuckley@users.noreply.github.com
+
+# --- Required for Windows SSH
 [credential]
 	helper = manager
+
+# --- Required for Linux/WSL SSH
+[credential]
+	helper = cache
+
+[color]
+	ui = true
+
+# Set VS Code as default git editor
+#[core]
+#  editor = code --wait
+
+# Set git specific aliases
 [alias]
+	aliases = config --get-regexp alias
+	amend = commit -a --amend
+	br = branch
+	ci = commit
 	co = checkout
 	cob = checkout -b
-	ci = commit
-	st = status
-	br = branch
-	df = diff
 	cp = cherry-pick
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-	lg = log -p
-	l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-	type = cat-file -t
+	df = diff
 	dump = cat-file -p
-	aliases = config --get-regexp alias
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches
+	ra = rebase --abort # use if you have trouble with merge conflict
+	rc = rebase --continue # use after resolving conflicts
+	rs = rebase --skip # nothing to resolve move along
+	st = status
+	type = cat-file -t
 	undo = reset HEAD~1 --mixed
-	amend = commit -a --amend
 
 	# Last 10 Branches https://ses4j.github.io/2020/04/01/git-alias-recent-branches/
 	lb = !git reflog show --pretty=format:'%gs ~ %gd' --date=relative | grep 'checkout:' | grep -oE '[^ ]+ ~ .*' | awk -F~ '!seen[$1]++' | head -n 10 | awk -F' ~ HEAD@{' '{printf(\"  \\033[33m%s: \\033[37m %s\\033[0m\\n\", substr($2, 1, length($2)-1), $1)}'
