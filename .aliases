@@ -29,11 +29,13 @@ alias reload='exec zsh -l'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+# List files alphabetically
+alias lsalpha= 'ls -lart | sort -k9,9'
 
 # Make and enter a directory
 alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
 
-# Install & Uninstall 
+# Install & Uninstall
 alias install="sudo apt install"
 alias uninstall="sudo apt remove --purge"
 
