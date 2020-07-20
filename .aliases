@@ -1,5 +1,15 @@
 # Aliases
 
+# Make sudo use aliases, from https://askubuntu.com/a/22043/353466
+alias sudo='sudo '
+
+# Repeat last command with sudo
+alias please='sudo $(fc -nl -1)'
+
+# Verbose in chmod & chown
+alias chmod='chmod -v'
+alias chown='chown -v'
+
 # Config files
 alias zshconfig="nano ~/.zshrc"
 alias ohmyzsh="nano ~/.oh-my-zsh"
@@ -12,7 +22,7 @@ alias distro='cat /etc/*-release'
 
 # Reload terminal
 # alias reload='source ~/.zshrc'
-# Apparenlty this way is better
+# Apparenlty this way is better:
 alias reload='exec zsh -l'
 
 # List files
@@ -23,7 +33,7 @@ alias l='ls -CF'
 # Make and enter a directory
 alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
 
-# Install & Uninstall
+# Install & Uninstall 
 alias install="sudo apt install"
 alias uninstall="sudo apt remove --purge"
 
@@ -51,3 +61,12 @@ alias -s {cs,ts,html}=code
 
 # Clone .git repo by just typing the URL
 alias -s git="git clone"
+
+# Colorize output, add file type indicator, and put sizes in human readable format
+# CURRENTLY OFF:
+#if ls --color > /dev/null 2>&1; then # GNU `ls`
+#  colorflag="--color"
+#else # OS X `ls`
+#  colorflag="-G"
+#fi
+#alias ls="ls -Fph ${colorflag}"
