@@ -1,0 +1,63 @@
+source $HOME/antigen.zsh
+
+# Load the oh-my-zsh's library
+antigen use oh-my-zsh
+
+# Plugins with oh-my-zsh
+antigen bundle colored-man-pages
+antigen bundle colorize
+antigen bundle command-not-found
+antigen bundle common-aliases
+antigen bundle dotenv
+antigen bundle extract
+antigen bundle fasd
+antigen bundle gatsby
+antigen bundle git
+antigen bundle node
+antigen bundle npm
+antigen bundle nvm
+antigen bundle ssh-agent
+antigen bundle sudo
+antigen bundle vscodeantigen bundle
+
+# External plugins
+antigen bundle MichaelAquilina/zsh-you-should-use
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle psprint/zsh-navigation-tools
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle desyncr/auto-ls
+antigen bundle unixorn/autoupdate-antigen.zshplugin
+
+# Install zsh-nvm
+export NVM_LAZY_LOAD=true
+antigen bundle lukechilds/zsh-nvm
+
+# OS specific  plugins
+if [ "$OSTYPE"="darwin11.0" ]; then
+    antigen bundle brew
+    antigen bundle brew-cask
+    antigen bundle gem
+    antigen bundle osx
+
+elif [[ $CURRENT_OS == 'Linux' ]]; then
+    # None so far...
+
+    if [[ $DISTRO == 'CentOS' ]]; then
+        antigen bundle centos
+    fi
+elif [[ $CURRENT_OS == 'Cygwin' ]]; then
+    antigen bundle cygwin
+fi
+
+# Syntax highlighting plugin must be listed last
+zsh-users/zsh-syntax-highlighting
+
+# Load the theme
+antigen theme romkatv/powerlevel10k
+
+# Tell antigen that you're done
+antigen apply
+
+# Source
+source $HOME/.aliases
