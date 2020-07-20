@@ -13,6 +13,7 @@ antigen bundle extract
 antigen bundle fasd
 antigen bundle gatsby
 antigen bundle git
+antigen bundle git-extras
 antigen bundle node
 antigen bundle npm
 antigen bundle nvm
