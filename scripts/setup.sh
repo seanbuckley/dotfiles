@@ -31,8 +31,11 @@ echo -e "${GREEN}Startng setup script${NOCOLOR}"
 echo "Current version info"
 lsb_release -a
 
+# Symlink dot files from this repo
 #./symlink.sh
-#./aptinstall.sh
+
+# Update and install programs
+#./apt-install.sh
 
 echo -e "${GREEN}Ending Setup script${NOCOLOR}"
 
