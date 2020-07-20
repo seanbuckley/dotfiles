@@ -2,18 +2,6 @@
 
 Personal dot files
 
-## TODO
+## Installation
 
-- [ ] branches for different machines
-- [ ] reconfigure to use [bare git repository method](https://news.ycombinator.com/item?id=11070797)
-- [ ] ComEmu settings file
-- [ ] PowerShell profile
-- [ ] .p10k.zsh
-- [ ] .profile
-- [ ] .bashrc
-- [ ] .gitconfig?
-- [ ] Review and add more [zsh plugins](https://github.com/unixorn/awesome-zsh-plugins)
-
-## Reference
-
-- [Hacker News - managing dot files](https://news.ycombinator.com/item?id=11070797)
+Run `bash scripts/setup.sh` to start the installation process.

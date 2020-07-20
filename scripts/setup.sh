@@ -2,22 +2,7 @@
 #
 # Linux/WSL setup script
 #
-# Borrowed from:
-# https://github.com/samuelramox/wsl-setup
-# https://github.com/victoriadrake/dotfiles/
-# https://github.com/tomnomnom/dotfiles
-#
-# Reminder: Carrage return must be set to LF, not CF
-
-# TODO
-# - Finalize symlinks
-# - Setup SSH keys?
-# - Run all scripts through <www.shellcheck.net>
-# - integrate concepts from the re-write on these pages:
-# https://codereview.stackexchange.com/questions/146896/simple-linux-upgrade-script-in-bash
-# https://linuxhint.com/30_bash_script_examples/
-# https://www.addictivetips.com/ubuntu-linux-tips/bash-scripts-to-automate-linux/
-# https://www.tecmint.com/using-shell-script-to-automate-linux-system-maintenance-tasks/
+# Windows reminder: Carrage returns must be set to LF, not CF
 
 RED="\033[1;31m"
 GREEN="\033[1;32m"
