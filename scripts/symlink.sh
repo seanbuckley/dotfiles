@@ -40,4 +40,4 @@ linkDotfile .gitconfig
 linkDotfile .gitignore
 #linkDotfile .tmux.conf
 #linkDotfile .vimrc
-#linkDotfile .zshrc
+linkDotfile .zshrc
