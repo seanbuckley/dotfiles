@@ -12,6 +12,7 @@ Personal dot files
 - [ ] .profile
 - [ ] .bashrc
 - [ ] .gitconfig?
+- [ ] Review and add more [zsh plugins](https://github.com/unixorn/awesome-zsh-plugins)
 
 ## Reference
 
