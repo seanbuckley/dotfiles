@@ -118,7 +118,6 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
 source $HOME/.aliases
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
