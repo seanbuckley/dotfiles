@@ -1,10 +1,16 @@
 #!/bin/bash
 
+echo "Starting apt-install.sh"
+
+# Add repos
+echo "Adding Repositories"
+sudo add-apt-repository ppa:aacebedo/fasd
+
 echo "Updating Ubuntu"
-sudo apt update
+sudo apt update -y
 sudo apt upgrade -y
 sudo apt autoremove
-sudo apt full-upgrade
+# sudo apt full-upgrade
 
 function install {
   which $1 &> /dev/null
@@ -17,10 +23,6 @@ function install {
   fi
 }
 
-# Add repos
-sudo add-apt-repository ppa:aacebedo/fasd
-sudo apt-get update -y
-
 # Install command line utils
 install build-essential
 install git
@@ -28,6 +30,9 @@ install curl
 install fasd
 install zsh
 install zsh-antigen
+
+# Install VSCode prerequisites
+# install shellcheck
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -40,3 +45,11 @@ nvm install --lts
 zsh --version
 chsh -s $(which zsh)
 echo $SHELL
+
+# TODO
+# - SSH keys
+# - Setup [ssh keys](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh). Tutorials [here](https://www.howtogeek.com/424510/how-to-create-and-install-ssh-keys-from-the-linux-shell/) and [here](https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/).
+# - Install [MesloNF fonts for Powerlevel10k](https://github.com/romkatv/powerlevel10k#manual-font-installation). Also consider installing Microsoft's [Cascadia Code](https://github.com/microsoft/cascadia-code) font.
+
+
+echo "Completed apt-install.sh"
