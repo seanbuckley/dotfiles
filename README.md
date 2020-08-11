@@ -1,6 +1,8 @@
 # dotfiles
 
-Personal dot files
+Personal dot files and shell installation scripts.
+
+[GitHub repository](https://github.com/seanbuckley/dotfiles)
 
 ## Installation
 
