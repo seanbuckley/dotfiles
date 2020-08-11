@@ -1,49 +1,75 @@
 #!/bin/bash
+#
+# --- Linux/WSL Setup Scripts ---
+# Install applications
 
-echo "Starting apt-install.sh"
+source ./install/utils.sh
+keep_sudo_alive
+
+e_header "Starting application install (apt-install.sh)"
 
 # Add repos
-echo "Adding Repositories"
-sudo add-apt-repository ppa:aacebedo/fasd
+e_header "Adding Repositories"
+sudo add-apt-repository -y ppa:aacebedo/fasd
+sudo add-apt-repository -y ppa:git-core/ppa
 
-echo "Updating Ubuntu"
+e_header "Updating Ubuntu"
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt autoremove
 # sudo apt full-upgrade
 
+e_header "Installing utilities"
 function install {
   which $1 &> /dev/null
 
   if [ $? -ne 0 ]; then
-    echo "Installing: ${1}..."
+    e_header "Installing: ${1}..."
     sudo apt install -y $1
   else
-    echo "Already installed: ${1}"
+    e_warning "Already installed: ${1}"
   fi
 }
 
 # Install command line utils
-install build-essential
 install git
+install build-essential
 install curl
 install fasd
 install zsh
 install zsh-antigen
 
+# Install WSL items
+seek_confirmation "Warning: Is this a WSL installation?"
+if is_confirmed; then
+  e_header "Installing WSL utilities"
+  install ubuntu-wsl # See https://github.com/wslutilities/wslu
+else
+  e_warning "Skipped WSL utilities install"
+fi
+
+
 # Install VSCode prerequisites
 # install shellcheck
 
 # Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# Currently using antigen
+#sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Install NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
+# Install the latest Node.js with NVM
 nvm install --lts
 
 # Make zsh the default shell
+#chsh -s $(which zsh)
+chsh -s /bin/zsh
+
+# zsh version info
 zsh --version
-chsh -s $(which zsh)
+
+e_header "Default shell:"
 echo $SHELL
 
 # TODO
@@ -52,4 +78,4 @@ echo $SHELL
 # - Install [MesloNF fonts for Powerlevel10k](https://github.com/romkatv/powerlevel10k#manual-font-installation). Also consider installing Microsoft's [Cascadia Code](https://github.com/microsoft/cascadia-code) font.
 
 
-echo "Completed apt-install.sh"
+e_success "Completed apt-install.sh"

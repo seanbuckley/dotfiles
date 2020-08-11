@@ -60,3 +60,28 @@ keep_sudo_alive() {
 replace() {
   mv -f "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
 }
+
+# Copy dotfiles to home
+function copyDotfile {
+  ="${HOME}/${1}"
+  dateStr=$(date +%Y-%m-%d-%H%M)
+
+  if [ -h ~/${1} ]; then
+    # Existing symlink
+    echo "Removing existing symlink: ${dest}"
+    rm ${dest}
+
+  elif [ -f "${dest}" ]; then
+    # Existing file
+    echo "Backing up existing file: ${dest}"
+    mv ${dest}{,.${dateStr}}
+
+  elif [ -d "${dest}" ]; then
+    # Existing dir
+    echo "Backing up existing dir: ${dest}"
+    mv ${dest}{,.${dateStr}}
+  fi
+
+  echo "Copying dotfile: ${dest}"
+  cp  ${DOTFILES_DIRECTOR}/${1} ${dest}
+}
