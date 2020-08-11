@@ -17,10 +17,10 @@ echo "Current version info"
 lsb_release -a
 
 # Symlink dot files from this repo
-#./symlink.sh
+./symlink.sh
 
 # Update and install programs
-#./apt-install.sh
+./apt-install.sh
 
 echo -e "${GREEN}Ending Setup script${NOCOLOR}"
 
