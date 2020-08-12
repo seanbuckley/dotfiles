@@ -63,7 +63,7 @@ replace() {
 
 # Copy dotfiles to home
 function copyDotfile {
-  ="${HOME}/${1}"
+  dest="${HOME}/${1}"
   dateStr=$(date +%Y-%m-%d-%H%M)
 
   if [ -h ~/${1} ]; then
@@ -73,15 +73,15 @@ function copyDotfile {
 
   elif [ -f "${dest}" ]; then
     # Existing file
-    echo "Backing up existing file: ${dest}"
+    echo "Backing up existing file: ${dest} as ${dest}.${dateStr}"
     mv ${dest}{,.${dateStr}}
 
   elif [ -d "${dest}" ]; then
     # Existing dir
-    echo "Backing up existing dir: ${dest}"
+    echo "Backing up existing dir: ${dest} as ${dest}.${dateStr}""
     mv ${dest}{,.${dateStr}}
   fi
 
-  echo "Copying dotfile: ${dest}"
-  cp  ${DOTFILES_DIRECTOR}/${1} ${dest}
+  echo "Copying dotfile: ${1}"
+  cp ${DOTFILES_DIRECTORY}/${1} ${dest}
 }
