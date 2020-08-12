@@ -1,10 +1,9 @@
 #!/bin/bash
 #
-#
 # --- Linux/WSL Setup Scripts ---
 # Install dot files
 
-source ./install/utils.sh
+source ./scripts/utils.sh
 keep_sudo_alive
 
 e_header "Starting dot file installations (dotfile-install.sh)"

@@ -3,7 +3,7 @@
 # Some functions used in install scripts
 
 # Global variables
-DOTFILES_DIRECTORY="$PWD"
+DOTFILES_DIRECTORY=$PWD
 
 # Header logging
 e_header() {
@@ -83,5 +83,5 @@ function copyDotfile {
   fi
 
   echo "Copying dotfile: ${1}"
-  cp ${DOTFILES_DIRECTORY}/${1} ${dest}
+  cp $DOTFILES_DIRECTORY/${1} ${dest}
 }

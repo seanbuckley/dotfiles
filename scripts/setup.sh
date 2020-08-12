@@ -18,9 +18,9 @@ lsb_release -a
 # Install applications
 seek_confirmation "Warning: This step will installation basic utilities and applications."
 if is_confirmed; then
-  e_header "Please, configure/disable your applications before installation:"
-  nano ${DOTFILES_DIRECTORY}/scripts/apt-install.sh
-  bash ./scripts/apps.sh
+  #e_header "Please, configure/disable your applications before installation:"
+  #nano ${DOTFILES_DIRECTORY}/scripts/apt-install.sh
+  bash ./scripts/apt-install.sh
 else
   e_warning "Skipped installing applications."
 fi
