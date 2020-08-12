@@ -16,6 +16,8 @@
   - [ ] https://github.com/tomnomnom/dotfiles
 - [ ] Review and add more [zsh plugins](https://github.com/unixorn/awesome-zsh-plugins)
 - [ ] Review and remove one instance of the git config set username and email. Completed via scripting (setup.sh) and also explicitly set in .gitconfig file.
+- [ ] Test if `nvm install --lts1` and `nvm use --lts` (npm-install.sh) actually work in a full script run (without terminal reload).
+
 
 ## Scripts
 
