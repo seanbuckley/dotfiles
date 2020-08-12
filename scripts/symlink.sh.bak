@@ -1,5 +1,7 @@
 #!/bin/bash
-
+#
+# Depreciated. This file is not in use.
+#
 # Up from scripts dir
 cd ..
 
