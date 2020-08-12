@@ -78,7 +78,7 @@ function copyDotfile {
 
   elif [ -d "${dest}" ]; then
     # Existing dir
-    echo "Backing up existing dir: ${dest} as ${dest}.${dateStr}""
+    echo "Backing up existing dir: ${dest} as ${dest}.${dateStr}"
     mv ${dest}{,.${dateStr}}
   fi
 
