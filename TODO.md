@@ -19,9 +19,10 @@
 
 ## Scripts
 
+- Install [MesloNF fonts for Powerlevel10k](https://github.com/romkatv/powerlevel10k#manual-font-installation). Also consider installing Microsoft's [Cascadia Code](https://github.com/microsoft/cascadia-code) font.
 - [ ] Finalize symlinks (and update as more dot files are)
-- [ ] Setup SSH keys?
-- [x] Run all scripts through <www.shellcheck.net>. Used VSCode integration
+- [ ] Setup [ssh keys](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh). Tutorials [here](https://www.howtogeek.com/424510/how-to-create-and-install-ssh-keys-from-the-linux-shell/) and [here](https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/).
+- [ ] Run all scripts through <www.shellcheck.net>. Used VSCode integration
 - [ ] integrate concepts from the re-write on these pages:
   - [ ] <https://codereview.stackexchange.com/questions/146896/simple-linux-upgrade-script-in-bash>
   - [ ] <https://linuxhint.com/30_bash_script_examples/>
