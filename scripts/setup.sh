@@ -63,4 +63,9 @@ rm -rf ${HOME}/wsl-setup.tar.gz
 rm -rf ${HOME}/wsl-setup.zip
 #rm -rf ${DOTFILES_DIRECTORY}
 
+# Set Git username and email
+e_header "Setting Git username and email"
+git config --global user.name "Sean Buckley"
+git config --global user.email "seanbuckley@users.noreply.github.com"
+
 e_success "Ending main setup script. Goodbye."
