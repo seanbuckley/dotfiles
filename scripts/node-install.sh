@@ -16,5 +16,6 @@ exec zsh -l
 
 # Install the latest Node.js with NVM
 nvm install --lts
+nvm use --lts
 
 e_success "Completed node-install.sh"
