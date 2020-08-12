@@ -37,7 +37,10 @@ install build-essential
 install curl
 install fasd
 install zsh
-install zsh-antigen
+#install zsh-antigen # Problems with this version
+
+# Install Antigen manually instead
+sudo curl -L git.io/antigen > ~/.antigen.zsh
 
 # Install WSL items
 seek_confirmation "Warning: Is this a WSL installation?"

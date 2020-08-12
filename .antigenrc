@@ -31,31 +31,31 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-history-substring-search
 
 # Install zsh-nvm
-export NVM_LAZY_LOAD=true
-antigen bundle lukechilds/zsh-nvm
+#export NVM_LAZY_LOAD=true
+#antigen bundle lukechilds/zsh-nvm
 
 # OS specific  plugins
-if [ "$OSTYPE"="darwin11.0" ]; then
-    antigen bundle brew
-    antigen bundle brew-cask
-    antigen bundle gem
-    antigen bundle osx
-
-elif [[ $CURRENT_OS == 'Linux' ]]; then
-    # None so far...
-
-    if [[ $DISTRO == 'CentOS' ]]; then
-        antigen bundle centos
-    fi
-elif [[ $CURRENT_OS == 'Cygwin' ]]; then
-    antigen bundle cygwin
-fi
-
-# Syntax highlighting plugin must be listed last
-zsh-users/zsh-syntax-highlighting
+#if [ "$OSTYPE"="darwin11.0" ]; then
+#    antigen bundle brew
+#    antigen bundle brew-cask
+#    antigen bundle gem
+#    antigen bundle osx
+#
+#elif [[ $CURRENT_OS == 'Linux' ]]; then
+#    # None so far...
+#
+#    if [[ $DISTRO == 'CentOS' ]]; then
+#        antigen bundle centos
+#    fi
+#elif [[ $CURRENT_OS == 'Cygwin' ]]; then
+#    antigen bundle cygwin
+#fi
 
 # Load the theme
 antigen theme romkatv/powerlevel10k
+
+# Syntax highlighting plugin must be listed last
+zsh-users/zsh-syntax-highlighting
 
 # Tell antigen that you're done
 antigen apply
