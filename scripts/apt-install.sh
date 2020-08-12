@@ -53,14 +53,8 @@ fi
 # install shellcheck
 
 # Install oh-my-zsh
-# Currently using antigen
+# Currently using antigen above
 #sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# Install NVM
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-
-# Install the latest Node.js with NVM
-nvm install --lts
 
 # Make zsh the default shell
 #chsh -s $(which zsh)

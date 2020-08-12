@@ -33,6 +33,14 @@ else
   e_warning "Skipped copying dot files."
 fi
 
+# Install nvm and nodejs
+seek_confirmation "Warning: This step will install nvm and nodejs"
+if is_confirmed; then
+  bash ./scripts/node-install.sh
+else
+  e_warning "Skipped nvm and nodejs installation."
+fi
+
 # Install npm packages
 seek_confirmation "Warning: This step will install gloabl npm packages"
 if is_confirmed; then
