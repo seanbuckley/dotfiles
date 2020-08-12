@@ -44,26 +44,25 @@ seek_confirmation "Warning: Is this a WSL installation?"
 if is_confirmed; then
   e_header "Installing WSL utilities"
   install ubuntu-wsl # See https://github.com/wslutilities/wslu
+
+  # Install VSCode prerequisites
+  #install shellcheck
+
 else
   e_warning "Skipped WSL utilities install"
 fi
 
-
-# Install VSCode prerequisites
-# install shellcheck
-
 # Install oh-my-zsh
-# Currently using antigen above
+# Not required. Currently using antigen above.
 #sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Make zsh the default shell
-#chsh -s $(which zsh)
-chsh -s /bin/zsh
+chsh -s $(which zsh)
+#chsh -s /bin/zsh
 
 # zsh version info
 zsh --version
 
-e_header "Default shell:"
-echo $SHELL
+e_header "Default shell: {$SHELL}"
 
 e_success "Completed apt-install.sh"
