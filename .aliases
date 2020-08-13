@@ -1,4 +1,7 @@
 # Aliases
+#
+# References
+# https://github.com/paulirish/dotfiles/blob/master/.aliases
 
 # Make sudo use aliases, from https://askubuntu.com/a/22043/353466
 alias sudo='sudo '
@@ -10,9 +13,35 @@ alias please='sudo $(fc -nl -1)'
 alias chmod='chmod -v'
 alias chown='chown -v'
 
+# List files
+alias ls='ls --color'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias lsd='ls -l | grep "^d"' # only directories
+
+# Easier navigation: .., ..., ~ and -
+alias ..="cd .."
+alias cd..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~" # `cd` is probably faster to type though
+alias -- -="cd -"
+
+# mv, rm, cp
+alias mv='mv -v'
+alias rm='rm -i -v'
+alias cp='cp -v'
+
 # Config files
 alias zshconfig="nano ~/.zshrc"
 alias ohmyzsh="nano ~/.oh-my-zsh"
+
+# Reload terminal
+# alias reload='source ~/.zshrc'
+# Apparenlty this way is better:
+alias reload='exec zsh -l'
 
 # Show machine IP
 alias myip="curl http://ipecho.net/plain; echo"
@@ -23,17 +52,8 @@ alias colormap="for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f
 # Info on current distro
 alias distro='cat /etc/*-release'
 
-# Reload terminal
-# alias reload='source ~/.zshrc'
-# Apparenlty this way is better:
-alias reload='exec zsh -l'
-
-# List files
-alias ll='ls -alF --color=auto'
-alias la='ls -A'
-alias l='ls -CF'
-# List files alphabetically
-alias lsalpha= 'ls -lart | sort -k9,9'
+# Recursively delete `.DS_Store` files
+alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
 
 # Make and enter a directory
 alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
@@ -66,42 +86,3 @@ alias -s {cs,ts,html}=code
 
 # Clone .git repo by just typing the URL
 alias -s git="git clone"
-
-# --- Paul Irish ---
-# https://github.com/paulirish/dotfiles/blob/master/.aliases
-
-# Easier navigation: .., ..., ~ and -
-alias ..="cd .."
-alias cd..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ~="cd ~" # `cd` is probably faster to type though
-alias -- -="cd -"
-
-# mv, rm, cp
-alias mv='mv -v'
-alias rm='rm -i -v'
-alias cp='cp -v'
-
-###
-# time to upgrade `ls`
-
-# use coreutils `ls` if possible…
-hash gls >/dev/null 2>&1 || alias gls="ls"
-
-# always use color, even when piping (to awk,grep,etc)
-if gls --color > /dev/null 2>&1; then colorflag="--color"; else colorflag="-G"; fi;
-export CLICOLOR_FORCE=1
-
-# ls options: A = include hidden (but not . or ..), F = put `/` after folders, h = byte unit suffixes
-alias ls='gls -AFh ${colorflag} --group-directories-first'
-alias lsd='ls -l | grep "^d"' # only directories
-#    `la` defined in .functions
-###
-
-# Recursively delete `.DS_Store` files
-alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
-
-# File size
-alias fs="stat -f \"%z bytes\""
