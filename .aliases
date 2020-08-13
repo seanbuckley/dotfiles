@@ -17,6 +17,9 @@ alias ohmyzsh="nano ~/.oh-my-zsh"
 # Show machine IP
 alias myip="curl http://ipecho.net/plain; echo"
 
+# Print color map
+alias colormap="for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done"
+
 # Info on current distro
 alias distro='cat /etc/*-release'
 
