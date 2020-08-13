@@ -30,6 +30,7 @@
   - [ ] <https://linuxhint.com/30_bash_script_examples/>
   - [ ] <https://www.addictivetips.com/ubuntu-linux-tips/bash-scripts-to-automate-linux/>
   - [ ] <https://www.tecmint.com/using-shell-script-to-automate-linux-system-maintenance-tasks/>
+- [ ] Add [zsh-wakatime](https://github.com/wbingli/zsh-wakatime), dependencies, and setup files.
 
 TODO - check all items below are covered...
 
