@@ -7,7 +7,7 @@
 #
 ## Referenced from: https://github.com/samuelramox/wsl-setup/blob/master/install/utils.sh
 
-source ./scripts/utils.sh
+source ./utils.sh
 keep_sudo_alive
 
 e_header "Startng main setup script"

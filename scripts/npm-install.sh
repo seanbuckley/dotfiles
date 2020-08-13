@@ -4,7 +4,7 @@
 # --- Linux/WSL Setup Scripts ---
 # Install global npm packages
 
-source ./scripts/utils.sh
+source ./utils.sh
 keep_sudo_alive
 
 e_header "Starting global npm package installation (npm-install.sh)"

@@ -3,7 +3,7 @@
 # --- Linux/WSL Setup Scripts ---
 # Install applications
 
-source ./scripts/utils.sh
+source ./utils.sh
 keep_sudo_alive
 
 e_header "Starting nvm and nodejs install (node-install.sh)"
