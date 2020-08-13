@@ -21,6 +21,9 @@ copyDotfile .gitattributes
 copyDotfile .gitconfig
 #copyDotfile .gitmessage
 copyDotfile .gitignore
+copyDotfile .p10k.zsh
 #copyDotfile .tmux.conf
 #copyDotfile .vimrc
 copyDotfile .zshrc
+
+e_success "Completed dot file installations"
