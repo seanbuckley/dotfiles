@@ -20,7 +20,7 @@ seek_confirmation "Warning: This step will installation basic utilities and appl
 if is_confirmed; then
   #e_header "Please, configure/disable your applications before installation:"
   #nano ${DOTFILES_DIRECTORY}/scripts/apt-install.sh
-  bash ./scripts/apt-install.sh
+  bash ./apt-install.sh
 else
   e_warning "Skipped installing applications."
 fi
@@ -28,7 +28,7 @@ fi
 # Copy dot files
 seek_confirmation "Warning: This step may overwrite your existing dot files and git configurations."
 if is_confirmed; then
-  bash ./scripts/dotfile-install.sh
+  bash ./dotfile-install.sh
 else
   e_warning "Skipped copying dot files."
 fi
@@ -36,7 +36,7 @@ fi
 # Install nvm and nodejs
 seek_confirmation "Warning: This step will install nvm and nodejs"
 if is_confirmed; then
-  bash ./scripts/node-install.sh
+  bash ./node-install.sh
 else
   e_warning "Skipped nvm and nodejs installation."
 fi
@@ -44,7 +44,7 @@ fi
 # Install npm packages
 seek_confirmation "Warning: This step will install gloabl npm packages"
 if is_confirmed; then
-  bash ./scripts/npm-install.sh
+  bash ./npm-install.sh
 else
   e_warning "Skipped npm global package installation."
 fi
@@ -64,16 +64,16 @@ fi
 e_header "Creating developer directory in Home"
 mkdir ${HOME}/dev
 
+# Set Git username and email (already set in .gitconfig file)
+e_header "Setting Git username and email"
+git config --global user.name "Sean Buckley"
+git config --global user.email "seanbuckley@users.noreply.github.com"
+
 # Cleanup cached downloads and remove the installation zip and folder
 e_header "Removing unnecessary files"
 sudo apt -y autoremove
 rm -rf ${HOME}/wsl-setup.tar.gz
 rm -rf ${HOME}/wsl-setup.zip
 #rm -rf ${DOTFILES_DIRECTORY}
-
-# Set Git username and email (already set in .gitconfig file)
-e_header "Setting Git username and email"
-git config --global user.name "Sean Buckley"
-git config --global user.email "seanbuckley@users.noreply.github.com"
 
 e_success "Ending main setup script. Goodbye."
