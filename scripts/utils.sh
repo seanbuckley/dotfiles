@@ -83,5 +83,5 @@ function copyDotfile {
   fi
 
   echo "Copying dotfile: ${1}"
-  cp $DOTFILES_DIRECTORY/${1} ${dest}
+  cp ./${1} ${dest}
 }
