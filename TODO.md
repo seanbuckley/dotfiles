@@ -1,6 +1,10 @@
 # TODO
 
+- [ ] nvm instlal node laests doesn't work. Then the npm install checks for node, doesn't see it, and installs node via apt.
+- [ ] antigen install didn't work
+
 - [ ] branches for different machines
+- [ ] find best method for sourcing files an the PATH issues that arise. See [here](http://mywiki.wooledge.org/BashFAQ/028) and [here](https://stackoverflow.com/questions/6659689/referring-to-a-file-relative-to-executing-script) for more info.
 - [ ] reconfigure to use [bare git repository method](https://news.ycombinator.com/item?id=11070797)
 - [ ] Add profiles:
   - [ ] ComEmu settings file
