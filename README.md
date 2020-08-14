@@ -6,4 +6,5 @@ Personal dot files and shell installation scripts.
 
 ## Installation
 
-Run `bash scripts/setup.sh` to start the installation process.
+1. Open the scripts folder with `cd scripts`. 
+2. Run `bash setup.sh` to start the installation process.
