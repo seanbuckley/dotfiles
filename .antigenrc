@@ -23,6 +23,7 @@ antigen bundle vscodeantigen bundle
 
 # External plugins
 antigen bundle desyncr/auto-ls
+antigen bundle lukechilds/zsh-nvm
 antigen bundle MichaelAquilina/zsh-you-should-use
 antigen bundle psprint/zsh-navigation-tools
 antigen bundle unixorn/autoupdate-antigen.zshplugin
