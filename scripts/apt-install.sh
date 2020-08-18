@@ -40,7 +40,7 @@ install zsh
 #install zsh-antigen # Problems with this version
 
 # Install Antigen manually instead
-sudo curl -L git.io/antigen > ~/.antigen.zsh
+sudo curl -L git.io/antigen > ~/antigen.zsh
 
 # Install WSL items
 seek_confirmation "Warning: Is this a WSL installation?"
