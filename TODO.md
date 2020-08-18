@@ -16,7 +16,7 @@
 - [ ]
 
 ## Someday
-- [ ] Investigate switch to [Antibody](https://getantibody.github.io/)
+- [ ] Investigate switch to [Antibody](https://getantibody.github.io/), [zgen](https://github.com/tarjoilija/zgen), [Zinit](https://github.com/zdharma/zinit), [zplug](https://github.com/zplug/zplug), etc. Comparisons [here](https://www.reddit.com/r/zsh/comments/ak0vgi/a_comparison_of_all_the_zsh_plugin_mangers_i_used/) and [here](https://jdhao.github.io/2019/10/08/zsh_plugin_managers_compare/)
 - [ ] Run all scripts through <www.shellcheck.net>. Or use VSCode integration.
 - [ ] Add profiles:
   - [ ] ComEmu settings file
@@ -32,6 +32,7 @@
   - [ ] https://github.com/tomnomnom/dotfiles
 - [ ] Review and add more [zsh plugins](https://github.com/unixorn/awesome-zsh-plugins)
 - [ ] integrate concepts from the re-write on these pages:
+  - [ ] <https://www.reddit.com/r/zsh/comments/hyoy6x/understanding_and_configuring_zsh/>
   - [ ] <https://codereview.stackexchange.com/questions/146896/simple-linux-upgrade-script-in-bash>
   - [ ] <https://linuxhint.com/30_bash_script_examples/>
   - [ ] <https://www.addictivetips.com/ubuntu-linux-tips/bash-scripts-to-automate-linux/>
