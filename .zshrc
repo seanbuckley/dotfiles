@@ -7,8 +7,9 @@ fi
 
 source $HOME/.antigen.zsh
 
-# Enable zsh autocompletion
+# Enable zsh autocompletion & colors
 autoload -Uz compinit && compinit
+autoload -U colors && colors
 
 source $HOME/.antigenrc
 source $HOME/.aliases
