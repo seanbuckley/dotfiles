@@ -63,7 +63,7 @@ alias install="sudo apt install"
 alias uninstall="sudo apt remove --purge"
 
 # System update & upgrade
-alias update='sudo apt update && sudo apt -y upgrade && sudo apt autoremove'
+alias update='sudo apt update && sudo apt -y upgrade && sudo apt autoremove && omz update && antigen update'
 
 # Git pull upstrean master
 alias gum="git pull upstream master"
