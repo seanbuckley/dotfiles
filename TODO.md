@@ -30,13 +30,15 @@
   - [ ] https://github.com/samuelramox/wsl-setup
   - [ ] https://github.com/victoriadrake/dotfiles/
   - [ ] https://github.com/tomnomnom/dotfiles
+  - [ ] https://github.com/mislav/dotfiles
 - [ ] Review and add more [zsh plugins](https://github.com/unixorn/awesome-zsh-plugins)
-- [ ] integrate concepts from the re-write on these pages:
-  - [ ] <https://www.reddit.com/r/zsh/comments/hyoy6x/understanding_and_configuring_zsh/>
-  - [ ] <https://codereview.stackexchange.com/questions/146896/simple-linux-upgrade-script-in-bash>
-  - [ ] <https://linuxhint.com/30_bash_script_examples/>
-  - [ ] <https://www.addictivetips.com/ubuntu-linux-tips/bash-scripts-to-automate-linux/>
-  - [ ] <https://www.tecmint.com/using-shell-script-to-automate-linux-system-maintenance-tasks/>
+- [ ] Integrate concepts from the re-write on these pages:
+  - [ ] https://www.reddit.com/r/zsh/comments/hyoy6x/understanding_and_configuring_zsh/
+  - [ ] https://codereview.stackexchange.com/questions/146896/simple-linux-upgrade-script-in-bash
+  - [ ] https://linuxhint.com/30_bash_script_examples/
+  - [ ] https://www.addictivetips.com/ubuntu-linux-tips/bash-scripts-to-automate-linux/
+  - [ ] https://www.tecmint.com/using-shell-script-to-automate-linux-system-maintenance-tasks/
+  - [ ] https://codereview.stackexchange.com/questions/146896/simple-linux-upgrade-script-in-bash
 - [ ] branches for different machines
 - [ ] find best method for sourcing files an the PATH issues that arise. See [here](http://mywiki.wooledge.org/BashFAQ/028) and [here](https://stackoverflow.com/questions/6659689/referring-to-a-file-relative-to-executing-script) for more info.
 - [ ] reconfigure to use [bare git repository method](https://news.ycombinator.com/item?id=11070797)
