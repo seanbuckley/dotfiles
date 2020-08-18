@@ -6,8 +6,17 @@
 - [ ] Add to scripts: install [MesloNF fonts for Powerlevel10k](https://github.com/romkatv/powerlevel10k#manual-font-installation). Also consider installing Microsoft's [Cascadia Code](https://github.com/microsoft/cascadia-code) font.
 - [ ] Add to scripts: complete setup of [ssh keys](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh). Tutorials [here](https://www.howtogeek.com/424510/how-to-create-and-install-ssh-keys-from-the-linux-shell/) and [here](https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/).
 - [ ] Add [zsh-wakatime](https://github.com/wbingli/zsh-wakatime), dependencies, and setup files.
+- [ ] Add a check and execute function:  
+      ```
+        check_and_exec () {
+            if [[ -e $1 ]]; then source $1; fi
+        }
+      ```  
+      via: <https://github.com/hamsternik/dotfiles/blob/master/.zshrc>
+- [ ]
 
 ## Someday
+- [ ] Investigate switch to [Antibody](https://getantibody.github.io/)
 - [ ] Run all scripts through <www.shellcheck.net>. Or use VSCode integration.
 - [ ] Add profiles:
   - [ ] ComEmu settings file
