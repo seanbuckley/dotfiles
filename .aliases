@@ -75,6 +75,9 @@ alias gri="git ls-files --ignored --exclude-standard | xargs -0 git rm -r"
 # Startup a server in your current directory (no npm packages required)
 alias server='python -m SimpleHTTPServer 8000'
 
+# Purge dot file backups (created by runing scripts/dotfile-install.sh)
+alias prgdtbk='find ~ -maxdepth 1 -type f -name ".*.2*-*-*-*" -delete'
+
 # --- WSL Aliases ---
 
 alias open="explorer.exe"
