@@ -65,6 +65,15 @@ alias uninstall="sudo apt remove --purge"
 # System update & upgrade
 alias update='sudo apt update && sudo apt -y upgrade && sudo apt autoremove && omz update && antigen update && nvm install-latest-npm'
 
+# Startup a server in your current directory (no npm packages required)
+alias server='python -m SimpleHTTPServer 8000'
+
+# Purge dot file backups (created by runing scripts/dotfile-install.sh)
+alias prgdtbk='find ~ -maxdepth 1 -type f -name ".*.2*-*-*-*" -delete'
+
+# --- Git Aliases ---
+# For more git aliases, see the .gitconfig file
+
 # Git pull upstrean master
 alias gum="git pull upstream master"
 
@@ -72,24 +81,20 @@ alias gum="git pull upstream master"
 # run `gri` to untrack anything in your updated .gitignore
 alias gri="git ls-files --ignored --exclude-standard | xargs -0 git rm -r"
 
-# Startup a server in your current directory (no npm packages required)
-alias server='python -m SimpleHTTPServer 8000'
+# --- Git Suffix Aliases ---
 
-# Purge dot file backups (created by runing scripts/dotfile-install.sh)
-alias prgdtbk='find ~ -maxdepth 1 -type f -name ".*.2*-*-*-*" -delete'
+# Clone .git repo by just typing the URL
+alias -s git="git clone"
 
 # --- WSL Aliases ---
 
 alias open="explorer.exe"
 
-# --- Suffix Aliases ---
-
+# --- WSL Suffix Aliases ---
 # Open these files in VS Code without typing the `code` command. Just type the filename.
+
 alias -s azcli=code
 alias -s ps1=code
 alias -s md=code
 alias -s json=code
 alias -s {cs,ts,html}=code
-
-# Clone .git repo by just typing the URL
-alias -s git="git clone"

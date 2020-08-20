@@ -29,19 +29,28 @@
 	br = branch
 	ci = commit
 	co = checkout
+	co-recurse = !sh -c 'git checkout $1 && git submodule update --recursive' - # Checkout a repo and it's (recursive) submodules
 	cob = checkout -b
 	cp = cherry-pick
 	df = diff
 	dump = cat-file -p
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	lc = log ORIG_HEAD.. --stat --no-merges # List all new commits after you fetched, with stats, but excluding merges
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches
-	ra = rebase --abort # use if you have trouble with merge conflict
-	rc = rebase --continue # use after resolving conflicts
-	rs = rebase --skip # nothing to resolve move along
+	llog = log --date=local # Just like git log, but will display dates in local timezone
+	new = !sh -c 'git log $1@{1}..$1@{0} "$@"' # See what new commits have been created by the last command (typically after a "git pull")
+	prune-all = !git remote | xargs -n 1 git remote prune # Prune all stale remote branches
+	ra = rebase --abort # Use if you have trouble with merge conflict
+	rc = rebase --continue # Use after resolving conflicts
+	rs = rebase --skip # Nothing to resolve move along
 	st = status
 	type = cat-file -t
 	undo = reset HEAD~1 --mixed
 	undopush= push -f origin HEAD^:master
+	untrack = rm --cache -- # Untrack a file
+	who = shortlog -s --
+	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -" # Get project history from a name or email address
+	whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short # Get project history from a commit name
 	master= checkout master
 
 	# Last 10 Branches https://ses4j.github.io/2020/04/01/git-alias-recent-branches/
