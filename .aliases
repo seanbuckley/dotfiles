@@ -63,7 +63,7 @@ alias install="sudo apt install"
 alias uninstall="sudo apt remove --purge"
 
 # System update & upgrade
-alias update='sudo apt update && sudo apt -y upgrade && sudo apt autoremove && omz update && antigen update && nvm install-latest-npm'
+alias update='sudo apt update && sudo apt -y upgrade && sudo apt autoremove && omz update && antigen update && nvm install --lts && nvm install-latest-npm'
 
 # Startup a server in your current directory (no npm packages required)
 alias server='python -m SimpleHTTPServer 8000'
