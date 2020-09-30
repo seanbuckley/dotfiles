@@ -15,7 +15,9 @@
   }
 ```
 
-- [ ] Add [.npmrc](https://node.dev/post/configuring-your-npmrc-for-an-optimal-node-js-environment) file
+- [ ] Add [.npmrc](https://node.dev/post/configuring-your-npmrc-for-an-optimal-node-js-environment) file.
+- [ ] Add [github CLI](https://cli.github.com/) to install script.
+- [ ] Add [croc](https://github.com/schollz/croc) (CLI file transfers) to install script.
 
 ## Someday
 
