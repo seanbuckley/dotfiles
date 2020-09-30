@@ -2,7 +2,7 @@
 
 ## Urgent
 
-- [ ] Errors: Script with `nvm install node latest` doesn't work. Then the npm install checks for node, doesn't see it, and installs node via apt.
+- [ ] Errors: Script with `nvm install node latest` doesn't work. Then the npm install checks for node, doesn't see it, and installs node via apt. The terminal must be refreshed first.
 - [ ] Review and remove one instance of the git config set username and email. Completed via scripting (setup.sh) and also explicitly set in .gitconfig file.
 - [ ] Add to scripts: install [MesloNF fonts for Powerlevel10k](https://github.com/romkatv/powerlevel10k#manual-font-installation). Also consider installing Microsoft's [Cascadia Code](https://github.com/microsoft/cascadia-code) font.
 - [ ] Add to scripts: complete setup of [ssh keys](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh). Tutorials [here](https://www.howtogeek.com/424510/how-to-create-and-install-ssh-keys-from-the-linux-shell/) and [here](https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/).
