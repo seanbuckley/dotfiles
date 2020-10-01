@@ -3,7 +3,7 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
-	
+
 [user]
 	name = Sean Buckley
 	email = seanbuckley@users.noreply.github.com
@@ -19,9 +19,10 @@
 [color]
 	ui = true
 
-# Set VS Code as default git editor
-#[core]
-#  editor = code --wait
+[core]
+	editor = nano
+#	#Set VS Code as default git editor
+#	editor = code --wait
 
 # Set git specific aliases
 [alias]
