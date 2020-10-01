@@ -40,6 +40,7 @@ install zsh
 #install zsh-antigen # Problems with this version
 
 # Install Antigen manually instead
+e_header "Installing Antigen"
 sudo curl -L git.io/antigen > ~/.antigen.zsh
 
 # Install WSL items
@@ -56,7 +57,8 @@ else
 fi
 
 # Install oh-my-zsh
-# Not required. Currently using antigen above.
+# Not required. Currently installed by Antigen.
+#e_header "Installing Oh My Zsh"
 #sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Make zsh the default shell
