@@ -64,11 +64,6 @@ fi
 e_header "Creating developer directory in Home"
 mkdir ${HOME}/dev
 
-# Set Git username and email (already set in .gitconfig file)
-e_header "Setting Git username and email"
-git config --global user.name "Sean Buckley"
-git config --global user.email "seanbuckley@users.noreply.github.com"
-
 # Cleanup cached downloads and remove the installation zip and folder
 e_header "Removing unnecessary files"
 sudo apt -y autoremove
