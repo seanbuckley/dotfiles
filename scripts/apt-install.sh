@@ -13,6 +13,10 @@ e_header "Adding Repositories"
 sudo add-apt-repository -y ppa:aacebedo/fasd
 sudo add-apt-repository -y ppa:git-core/ppa
 
+# Add gh (Github CLI repository)
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+sudo apt-add-repository https://cli.github.com/packages
+
 e_header "Updating Ubuntu"
 sudo apt update -y
 sudo apt upgrade -y
@@ -26,6 +30,7 @@ installPackage build-essential
 installPackage curl
 installPackage fasd
 installPackage zsh
+installPackage gh
 #installPackage zsh-antigen # Problems with this version
 
 # Install Antigen manually instead
