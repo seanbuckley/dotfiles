@@ -19,7 +19,6 @@ sudo apt upgrade -y
 sudo apt autoremove
 # sudo apt full-upgrade
 
-e_header "Installing utilities"
 function install {
   which $1 &> /dev/null
 
@@ -32,6 +31,7 @@ function install {
 }
 
 # Install command line utils
+e_header "Installing command line utilities:"
 install git
 install build-essential
 install curl
@@ -40,6 +40,7 @@ install zsh
 #install zsh-antigen # Problems with this version
 
 # Install Antigen manually instead
+e_header "Installing Antigen"
 sudo curl -L git.io/antigen > ~/.antigen.zsh
 
 # Install WSL items
@@ -56,16 +57,18 @@ else
 fi
 
 # Install oh-my-zsh
-# Not required. Currently using antigen above.
+# Not required. Currently installed by Antigen.
+#e_header "Installing Oh My Zsh"
 #sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Make zsh the default shell
+e_header "Making zsh the default shell"
 chsh -s $(which zsh)
 #chsh -s /bin/zsh
 
 # zsh version info
 zsh --version
 
-e_header "Default shell: {$SHELL}"
+e_header "Default shell is now: {$SHELL}"
 
 e_success "Completed apt-install.sh"
