@@ -19,38 +19,27 @@ sudo apt upgrade -y
 sudo apt autoremove
 # sudo apt full-upgrade
 
-function install {
-  which $1 &> /dev/null
-
-  if [ $? -ne 0 ]; then
-    e_header "Installing: ${1}..."
-    sudo apt install -y $1
-  else
-    e_warning "Already installed: ${1}"
-  fi
-}
-
 # Install command line utils
 e_header "Installing command line utilities:"
-install git
-install build-essential
-install curl
-install fasd
-install zsh
-#install zsh-antigen # Problems with this version
+installPackage git
+installPackage build-essential
+installPackage curl
+installPackage fasd
+installPackage zsh
+#installPackage zsh-antigen # Problems with this version
 
 # Install Antigen manually instead
-e_header "Installing Antigen"
+e_header "Installing Antigen with curl"
 sudo curl -L git.io/antigen > ~/.antigen.zsh
 
 # Install WSL items
 seek_confirmation "Warning: Is this a WSL installation?"
 if is_confirmed; then
   e_header "Installing WSL utilities"
-  install ubuntu-wsl # See https://github.com/wslutilities/wslu
+  installPackage ubuntu-wsl # See https://github.com/wslutilities/wslu
 
   # Install VSCode prerequisites
-  #install shellcheck
+  #installPackage shellcheck
 
 else
   e_warning "Skipped WSL utilities install"
