@@ -85,3 +85,15 @@ function copyDotfile {
   echo "Copying dotfile: ${1}"
   cp ./${1} ${dest}
 }
+
+# Install a program with apt
+function installPackage {
+  which $1 &> /dev/null
+
+  if [ $? -ne 0 ]; then
+    e_header "Installing: ${1}..."
+    sudo apt install -y $1
+  else
+    e_warning "Already installed: ${1}"
+  fi
+}
