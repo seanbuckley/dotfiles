@@ -19,7 +19,6 @@ sudo apt upgrade -y
 sudo apt autoremove
 # sudo apt full-upgrade
 
-e_header "Installing utilities"
 function install {
   which $1 &> /dev/null
 
@@ -32,6 +31,7 @@ function install {
 }
 
 # Install command line utils
+e_header "Installing command line utilities:"
 install git
 install build-essential
 install curl
@@ -62,12 +62,13 @@ fi
 #sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Make zsh the default shell
+e_header "Making zsh the default shell"
 chsh -s $(which zsh)
 #chsh -s /bin/zsh
 
 # zsh version info
 zsh --version
 
-e_header "Default shell: {$SHELL}"
+e_header "Default shell is now: {$SHELL}"
 
 e_success "Completed apt-install.sh"
