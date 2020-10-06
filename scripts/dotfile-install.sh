@@ -21,6 +21,7 @@ copyDotfile .gitattributes
 copyDotfile .gitconfig
 #copyDotfile .gitmessage
 copyDotfile .gitignore
+copyDotfile .npmrc
 copyDotfile .p10k.zsh
 #copyDotfile .tmux.conf
 #copyDotfile .vimrc
