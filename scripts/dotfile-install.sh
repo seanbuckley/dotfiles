@@ -11,7 +11,7 @@ e_header "Starting dot file installations (dotfile-install.sh)"
 # Move up from scripts directory
 cd ..
 
-# Copy file from dotfiles director to home
+# Copy file from dotfiles directory to home
 copyDotfile .aliases
 copyDotfile .antigenrc
 #copyDotfile .bash_profile
@@ -21,6 +21,7 @@ copyDotfile .gitattributes
 copyDotfile .gitconfig
 #copyDotfile .gitmessage
 copyDotfile .gitignore
+copyDotfile .npmrc
 copyDotfile .p10k.zsh
 #copyDotfile .tmux.conf
 #copyDotfile .vimrc
