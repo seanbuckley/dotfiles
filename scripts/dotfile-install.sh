@@ -8,10 +8,10 @@ keep_sudo_alive
 
 e_header "Starting dot file installations (dotfile-install.sh)"
 
-# Move up from scripts directory
+e_header "Moving up from scripts directory"
 cd ..
 
-# Copy file from dotfiles directory to home
+e_header "Copying dotfiles directory to home. Existing dotfiles will be backed up."
 copyDotfile .aliases
 copyDotfile .antigenrc
 #copyDotfile .bash_profile
