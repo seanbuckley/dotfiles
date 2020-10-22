@@ -15,7 +15,7 @@ e_header "Startng main setup script"
 e_header "System version info"
 lsb_release -a
 
-# Install applications
+e_header "--- Applications ---"
 seek_confirmation "Warning: This step will installation basic utilities and applications."
 if is_confirmed; then
   #e_header "Please, configure/disable your applications before installation:"
@@ -25,7 +25,7 @@ else
   e_warning "Skipped installing applications."
 fi
 
-# Copy dot files
+e_header "--- Dotfiles ---"
 seek_confirmation "Warning: This step may overwrite your existing dot files and git configurations."
 if is_confirmed; then
   bash ./dotfile-install.sh
@@ -33,7 +33,7 @@ else
   e_warning "Skipped copying dot files."
 fi
 
-# Install nvm and nodejs
+e_header "--- NVM and Node.js ---"
 seek_confirmation "Warning: This step will install nvm and nodejs"
 if is_confirmed; then
   bash ./node-install.sh
@@ -41,7 +41,7 @@ else
   e_warning "Skipped nvm and nodejs installation."
 fi
 
-# Install npm packages
+e_header "--- Global Node Packages ---"
 seek_confirmation "Warning: This step will install gloabl npm packages"
 if is_confirmed; then
   bash ./npm-install.sh
@@ -49,7 +49,7 @@ else
   e_warning "Skipped npm global package installation."
 fi
 
-# Generate ssh
+e_header "--- Generate SSH ---"
 seek_confirmation "Warning: This step generate will generate SSH keys."
 if is_confirmed; then
   ask "Please provide an email address: " && printf "\n"
@@ -60,13 +60,14 @@ else
   e_warning "Skipped SSH key generation."
 fi
 
-# Create a directory for projects and development
+e_header "--- Folder Setup ---"
 e_header "Creating developer directory in Home"
 mkdir ${HOME}/dev
 
-# Cleanup cached downloads and remove the installation zip and folder
-e_header "Removing unnecessary files"
+e_header "--- Cleanup ---"
+e_header "Removing unnecessary apt files"
 sudo apt -y autoremove
+e_header "Deleting temporary installation folders"
 rm -rf ${HOME}/wsl-setup.tar.gz
 rm -rf ${HOME}/wsl-setup.zip
 #rm -rf ${DOTFILES_DIRECTORY}
