@@ -29,6 +29,7 @@ installPackage git
 installPackage build-essential
 installPackage curl
 installPackage fasd
+installPackage fzf
 installPackage zsh
 installPackage gh
 #installPackage zsh-antigen # Problems with this version
