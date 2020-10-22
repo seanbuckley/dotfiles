@@ -12,7 +12,7 @@ e_header "Adding Repositories"
 sudo add-apt-repository -y ppa:aacebedo/fasd
 sudo add-apt-repository -y ppa:git-core/ppa
 
-e_header "Github CLI repository"
+e_header "Adding Github CLI repository"
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
 sudo apt-add-repository https://cli.github.com/packages
 
