@@ -7,7 +7,22 @@
 #
 ## Referenced from: https://github.com/samuelramox/wsl-setup/blob/master/install/utils.sh
 
-source ./utils.sh
+# http://www.gnu.org/software/bash/manual/bashref.html#The-Set-Builtin
+# Use the set command:
+# -a: Mark variables and function which are modified or created for export to the environment of subsequent commands.
+set -a
+# Put variables that will be marked for export in here.
+# These will be available from within other scripts and other commands.
+# If script2 modifies these variables, the modifications will not be present in the other scripts.
+
+# 
+# https://stackoverflow.com/a/246128
+# "Is a useful one-liner which will give you the full directory name of the script no matter where it is being called from."
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $DIR/utils.sh
+
+set +a
+
 keep_sudo_alive
 
 e_header "Startng main setup script"

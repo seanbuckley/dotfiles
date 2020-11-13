@@ -3,7 +3,6 @@
 # --- Linux/WSL Setup Scripts ---
 # Install applicatiyons
 
-source ./utils.sh
 keep_sudo_alive
 
 e_header "Starting application install (apt-install.sh)"
