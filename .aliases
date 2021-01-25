@@ -14,7 +14,7 @@ alias chmod='chmod -v'
 alias chown='chown -v'
 
 # List files
-alias ls='ls --color'
+alias ls='ls --color=always'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
