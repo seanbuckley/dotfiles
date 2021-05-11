@@ -7,6 +7,8 @@ antigen bundle colorize
 antigen bundle command-not-found
 antigen bundle common-aliases
 antigen bundle dotenv
+antigen bundle docker
+antigen bundle docker-compose
 antigen bundle extract
 antigen bundle fasd
 antigen bundle gatsby
