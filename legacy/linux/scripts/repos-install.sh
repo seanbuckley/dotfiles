@@ -23,8 +23,6 @@ repos=(
   seanbuckley/dotfiles
   seanbuckley/ai
   seanbuckley/notes
-  drfld/infra
-  buckley-ca/buckley.ca
 )
 
 # A fresh machine has no key registered with GitHub, so SSH cannot be the

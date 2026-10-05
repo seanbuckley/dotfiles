@@ -89,5 +89,3 @@ bash scripts/repos-install.sh
 - [seanbuckley/dotfiles](https://github.com/seanbuckley/dotfiles)
 - [seanbuckley/ai](https://github.com/seanbuckley/ai)
 - [seanbuckley/notes](https://github.com/seanbuckley/notes)
-- [drfld/infra](https://github.com/drfld/infra)
-- [buckley-ca/buckley.ca](https://github.com/buckley-ca/buckley.ca)
