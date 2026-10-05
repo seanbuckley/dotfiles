@@ -1,0 +1,194 @@
+# ==============================================================================
+# ~/.gitconfig: global git settings (Linux / WSL copy)
+#
+# What:     Identity, credential helpers (GitHub CLI), delta as the pager,
+#           extra aliases from gitalias.txt, many personal aliases and typo
+#           fixes, and sensible defaults (rebase on pull, rerere, zdiff3).
+# Used by:  git, for every repo. Symlinked to ~/.gitconfig by
+#           scripts/dotfile-install.sh.
+# Needs:    git-delta (pager), gh on PATH (credential helper),
+#           ~/.config/gitalias/gitalias.txt (downloaded by dotfile-install.sh),
+#           git-lfs if an LFS repo is used.
+# Gotchas:  dotfiles-windows has its own, drifted copy of this file.
+#           The "Windows" comments below are leftovers from sharing the file.
+#           core.editor (nano) differs from $EDITOR in .zshrc (code --wait).
+# Fate:     merged with the Windows copy into one chezmoi template
+#           (docs/tasks.md, P2.02).
+# ==============================================================================
+
+# Windows helpers
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+	process = git-lfs filter-process
+
+[user]
+	name = Sean Buckley
+	email = seanbuckley@users.noreply.github.com
+
+# --- Required for Windows SSH
+# Despite the heading, this is the default helper here too: git asks the GitHub
+# CLI for credentials. The leading `!` means "run this shell command"; without
+# it git would look for a program called git-credential-gh, which doesn't exist.
+# The per-host blocks near the end of the file set the same helper for
+# github.com and gist.github.com.
+[credential]
+	helper = !gh auth git-credential
+
+
+
+# Include local config if relevant
+[include]
+    # Linux
+	# path = ~/.gitconfig_local
+	path = ~/.config/gitalias/gitalias.txt
+# [credential "https://github.com"]
+	# helper =
+	# Windows
+	# helper = !'C:\\Program Files\\GitHub CLI\\gh.exe' auth git-credential
+# [credential "https://gist.github.com"]
+	# helper =
+	# WINDOWS
+	# helper = !'C:\\Program Files\\GitHub CLI\\gh.exe' auth git-credential
+
+
+[color]
+	branch = auto
+	diff = auto
+	status = auto
+	interactive = auto
+	ui = true
+	pager = true
+
+[core]
+	editor = nano
+	pager = delta
+
+	# Set VS Code as default git editor
+	# editor = code --wait
+
+	# Set Micro as the default git editor
+	# editor = micro --wait
+
+# Set git specific aliases
+[alias]
+	aliases = config --get-regexp alias
+	amend = commit -a --amend
+	bl = blame -w -M -C
+	br = branch -rav
+	branches = branch -rav
+	changed = status -sb
+	ci = commit
+	co = checkout
+	co-recurse = !sh -c 'git checkout $1 && git submodule update --recursive' - # Checkout a repo and it's (recursive) submodules
+	cob = checkout -b
+	cp = cherry-pick
+	df = diff
+	dc = diff --cached # Shows the difference between the current branch and the staged files
+	dump = cat-file -p
+	filelog = log -u
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	last = log -p --max-count=1 --word-diff
+	lastref = rev-parse --short HEAD
+	lasttag = describe --tags --abbrev=0
+	lc = log ORIG_HEAD.. --stat --no-merges # List all new commits after you fetched, with stats, but excluding merges
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches --date=relative
+	llog = log --date=local # Just like git log, but will display dates in local timezone
+	master= checkout master
+	new = !sh -c 'git log $1@{1}..$1@{0} "$@"' # See what new commits have been created by the last command (typically after a "git pull")
+	pick = add -p
+	pf = !"git fetch --all; git reset --hard HEAD; git merge @{u}" # Pull and overwrite local changes
+	ps = !"git fetch --all; git stash; git merge @{u}; git stash pop" # Pull and stash local changes
+	prune-all = !git remote | xargs -n 1 git remote prune # Prune all stale remote branches
+	ra = rebase --abort # Use if you have trouble with merge conflict
+	rc = rebase --continue # Use after resolving conflicts
+	remotes = remote -v show
+	rs = rebase --skip # Nothing to resolve move along
+	st = status
+	sync = !git fetch upstream -v && git fetch origin -v && git checkout master && git merge upstream/master
+	type = cat-file -t
+	undo = reset head~
+	undopush= push -f origin HEAD^:master
+	unstage = reset HEAD
+	untrack = rm --cache -- # Untrack a file
+	up = !git remote update -p; git merge --ff-only @{u} # @{u} points to the upstream branch
+	wdiff = diff --word-diff
+	whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short # Get project history from a commit name
+	who = shortlog -s -e --
+	whoami = !git config user.name && git config user.email
+	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -" # Get project history from a name or email address
+
+	# Last 10 Branches https://ses4j.github.io/2020/04/01/git-alias-recent-branches/
+	# lb = !git reflog show --pretty=format:'%gs ~ %gd' --date=relative | grep 'checkout:' | grep -oE '[^ ]+ ~ .*' | awk -F~ '!seen[$1]++' | head -n 10 | awk -F' ~ HEAD@{' '{printf(\"  \\033[33m%s: \\033[37m %s\\033[0m\\n\", substr($2, 1, length($2)-1), $1)}'
+
+	# Delete all remote tracking Git branches where the upstream branch has been deleted https://about.gitlab.com/blog/2020/04/17/dotfiles-document-and-automate-your-macbook-setup/
+	# git_prune = "git fetch --prune && git branch -vv | grep 'origin/.*: gone]' | awk '{print \$1}' | xargs git branch -d"
+
+	# typos
+	ad = add
+	bisec = bisect
+	bisetc = bisect
+	branhc = branch
+	breach = branch
+	breanch = branch
+	checkotu = checkout
+	checkou = checkout
+	checout = checkout
+	cherrypick = cherry-pick
+	cloen = clone
+	comit = commit
+	comitt = commit
+	committ = commit
+	dif = diff
+	fetc = fetch
+	fethc = fetch
+	greo = grep
+	grp = grep
+	grpe = grep
+	hceckout = checkout
+	mereg = merge
+	merg = merge
+	rbanch = branch
+	stat = status
+	statis = status
+	stats = status
+	statsu = status
+	statsus = status
+	statu = status
+	statys = status
+	stauts = status
+	sttus = status
+	submodules = submodule
+	tags = tag
+[interactive]
+	diffFilter = delta --color-only --features=interactive
+[delta]
+	navigate = true # use n and N to move between diff sections
+	#dark = true  # or light = true, or omit for auto-detection
+	hyperlinks = true
+	# line-numbers = true # seems nice until you want to copypaste and they're there…
+	colorMoved = default
+	#side-by-side = true
+[merge]
+	conflictStyle = zdiff3
+# An empty `helper =` first clears any helper set earlier (including the
+# system one), so only the next line is used for this host.
+[credential "https://github.com"]
+	helper = 
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !gh auth git-credential
+[init]
+	defaultBranch = main
+# Pull rebases instead of merging; autoStash puts local edits aside during
+# the rebase. rerere remembers conflict resolutions and replays them.
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+	autoSquash = true
+[rerere]
+	enabled = true
+	autoupdate = true

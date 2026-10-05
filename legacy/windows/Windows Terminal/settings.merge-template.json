@@ -1,0 +1,134 @@
+{
+  "copyOnSelect": true,
+  "actions": [
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "cd ..\r"
+      },
+      "keys": "ctrl+up",
+      "name": "Navigate to parent directory"
+    },
+    {
+      "command": "paste",
+      "keys": "ctrl+v"
+    },
+    {
+      "command": "find",
+      "keys": "ctrl+shift+f"
+    },
+    {
+      "command": {
+        "action": "splitPane",
+        "split": "auto",
+        "splitMode": "duplicate"
+      },
+      "keys": "alt+shift+d",
+      "name": "Split the pane"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "clear\r"
+      },
+      "keys": "alt+k",
+      "name": "Clear terminal"
+    }
+  ],
+  "profiles": {
+    "defaults": {
+      "colorScheme": "One Half Dark",
+      "font": {
+        "face": "FiraCode Nerd Font Mono"
+      }
+    },
+    "additions": [
+      {
+        "commandline": "powershell.exe -NoProfile -Command \"Start-Process pwsh -Verb RunAs\"",
+        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44ba}",
+        "hidden": false,
+        "icon": "ms-appx:///ProfileIcons/pwsh.png",
+        "name": "PowerShell Elevated"
+      },
+      {
+        "commandline": "pwsh.exe -NoProfile",
+        "guid": "{edd55b09-a52a-45ac-b48d-d3872644b998}",
+        "hidden": false,
+        "icon": "ms-appx:///ProfileIcons/pwsh.png",
+        "name": "PowerShell (No Profile)",
+        "startingDirectory": "%USERPROFILE%"
+      }
+    ]
+  },
+  "schemes": [
+    {
+      "background": "#132738",
+      "black": "#000000",
+      "blue": "#1460D2",
+      "brightBlack": "#555555",
+      "brightBlue": "#5555FF",
+      "brightCyan": "#6AE3FA",
+      "brightGreen": "#3BD01D",
+      "brightPurple": "#FF55FF",
+      "brightRed": "#F40E17",
+      "brightWhite": "#FFFFFF",
+      "brightYellow": "#EDC809",
+      "cursorColor": "#FFFFFF",
+      "cyan": "#00BBBB",
+      "foreground": "#FFFFFF",
+      "green": "#38DE21",
+      "name": "Cobalt2",
+      "purple": "#FF005D",
+      "red": "#FF0000",
+      "selectionBackground": "#FFFFFF",
+      "white": "#BBBBBB",
+      "yellow": "#FFE50A"
+    },
+    {
+      "background": "#300A24",
+      "black": "#171421",
+      "blue": "#0037DA",
+      "brightBlack": "#767676",
+      "brightBlue": "#08458F",
+      "brightCyan": "#2C9FB3",
+      "brightGreen": "#26A269",
+      "brightPurple": "#A347BA",
+      "brightRed": "#C01C28",
+      "brightWhite": "#F2F2F2",
+      "brightYellow": "#A2734C",
+      "cursorColor": "#FFFFFF",
+      "cyan": "#3A96DD",
+      "foreground": "#FFFFFF",
+      "green": "#26A269",
+      "name": "Ubuntu-ColorScheme",
+      "purple": "#881798",
+      "red": "#C21A23",
+      "selectionBackground": "#FFFFFF",
+      "white": "#CCCCCC",
+      "yellow": "#A2734C"
+    },
+    {
+      "background": "#282C34",
+      "black": "#282C34",
+      "blue": "#61AFEF",
+      "brightBlack": "#5A6374",
+      "brightBlue": "#61AFEF",
+      "brightCyan": "#56B6C2",
+      "brightGreen": "#98C379",
+      "brightPurple": "#C678DD",
+      "brightRed": "#E06C75",
+      "brightWhite": "#DCDFE4",
+      "brightYellow": "#E5C07B",
+      "cursorColor": "#FFFFFF",
+      "cyan": "#56B6C2",
+      "foreground": "#DCDFE4",
+      "green": "#98C379",
+      "name": "One Half Dark",
+      "purple": "#C678DD",
+      "red": "#E06C75",
+      "selectionBackground": "#FFFFFF",
+      "white": "#DCDFE4",
+      "yellow": "#E5C07B"
+    }
+  ]
+}

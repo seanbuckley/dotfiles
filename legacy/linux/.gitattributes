@@ -1,0 +1,11 @@
+# ~/.gitattributes: line-ending rules (LF everywhere, CRLF for Windows batch
+# files). Stops WSL/Windows checkouts showing every file as modified.
+# Used by: git, via the symlink from scripts/dotfile-install.sh. Note that git
+# only reads a *global* attributes file if core.attributesFile points at it,
+# which .gitconfig does not set, so in practice this file mainly documents intent.
+# Fate: becomes the new repo's own .gitattributes (docs/tasks.md, P1.02).
+
+#https://code.visualstudio.com/docs/remote/troubleshooting#_resolving-git-line-ending-issues-in-wsl-resulting-in-many-modified-files
+* text=auto eol=lf
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
