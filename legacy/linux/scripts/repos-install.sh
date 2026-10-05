@@ -105,7 +105,7 @@ mkdir -p "$CODE_DIRECTORY"
 # private repo does not abort the whole step.
 failed=()
 for repo in "${repos[@]}"; do
-  # ${repo##*/} strips the owner: seanbuckley/notes -> ~/code/notes.
+  # ${repo##*/} strips the owner: owner/repo -> ~/code/repo.
   clone_or_update_git_repo "$(git_url "$repo")" "${CODE_DIRECTORY}/${repo##*/}" ||
     failed+=("$repo")
 done
