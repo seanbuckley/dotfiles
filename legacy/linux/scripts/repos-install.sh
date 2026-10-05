@@ -21,8 +21,6 @@ e_header "Starting repository setup (repos-install.sh)"
 # owner/name pairs; cloned to $CODE_DIRECTORY/<name>
 repos=(
   seanbuckley/dotfiles
-  seanbuckley/ai
-  seanbuckley/notes
 )
 
 # A fresh machine has no key registered with GitHub, so SSH cannot be the

@@ -87,5 +87,3 @@ bash scripts/repos-install.sh
 ```
 
 - [seanbuckley/dotfiles](https://github.com/seanbuckley/dotfiles)
-- [seanbuckley/ai](https://github.com/seanbuckley/ai)
-- [seanbuckley/notes](https://github.com/seanbuckley/notes)

@@ -8,5 +8,5 @@ Frozen copy of the old repos at `pre-merge-baseline`. Read-only reference. Delet
 | `windows/` | `seanbuckley/dotfiles-windows` | `94578fb` |
 
 - Excluded: `Tabby/`, `.hyper.js`, `Windows Terminal/settings.json`, `.vscode/` (both repos), and `linux/docs/` (moved to the root `docs/`).
-- Scrubbed: commented `C:\Users\...` and `/mnt/c/...` paths in `linux/.gitconfig`; the example path in `windows/DECISIONS.md`; two private repos outside `seanbuckley` from the repo lists in `linux/README.md` and `linux/scripts/repos-install.sh`.
+- Scrubbed: commented `C:\Users\...` and `/mnt/c/...` paths in `linux/.gitconfig`; the example path in `windows/DECISIONS.md`; private repo names from the repo lists in `linux/README.md` and `linux/scripts/repos-install.sh`.
 - Nothing here is applied by chezmoi.
