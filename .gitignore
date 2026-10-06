@@ -1,0 +1,16 @@
+# The repo's own ignores. The global ignore lives in home/ from Phase 2.
+
+# OS and editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.vscode/
+.idea/
+
+# Local-only files that must never be committed
+*.local
+*.local.ps1
+.env
+audit-words.txt
