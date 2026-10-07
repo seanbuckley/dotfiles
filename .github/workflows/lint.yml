@@ -196,6 +196,7 @@ jobs:
         run: |
           # Throwaway home, so nothing touches the runner's profile.
           export HOME="$RUNNER_TEMP/home" USERPROFILE="$RUNNER_TEMP/home"
+          export XDG_CONFIG_HOME="$HOME/.config" # runners set it outside HOME
           mkdir -p "$HOME"
           chezmoi --version
           chezmoi init --promptDefaults --source .
@@ -206,6 +207,7 @@ jobs:
       - name: Apply, then check the rendered git config
         run: |
           export HOME="$RUNNER_TEMP/home" USERPROFILE="$RUNNER_TEMP/home"
+          export XDG_CONFIG_HOME="$HOME/.config" # runners set it outside HOME
           chezmoi apply --source .
           chezmoi verify --source .
           # git reads ~/.gitconfig (and its includes) from the throwaway home.
@@ -219,10 +221,23 @@ jobs:
           # ~/.gitconfig_local must be the last include, so local settings win.
           git config --file "$HOME/.gitconfig" --get-all include.path | tail -n 1 \
             | grep -qx '~/.gitconfig_local'
-          git aliases | grep -q '^alias\.whoami '
+          git aliases | grep '^alias\.whoami ' > /dev/null # not -q: an early exit can SIGPIPE git under pipefail
+          # Global ignore: OS/editor junk only, never project files.
+          git init -q "$RUNNER_TEMP/ignore-test"
+          cd "$RUNNER_TEMP/ignore-test"
+          for f in x/.DS_Store .vscode/state.json; do
+            git check-ignore -q "$f" || { echo "::error::$f should be ignored."; exit 1; }
+          done
+          for f in x/a.png x/.env .vscode/settings.json .vscode/extensions.json .idea/vcs.xml; do
+            if git check-ignore -q "$f"; then
+              echo "::error::The global ignore hides $f; keep it to OS and editor junk."
+              exit 1
+            fi
+          done
       - name: Env overrides win over defaults
         run: |
           export HOME="$RUNNER_TEMP/home" USERPROFILE="$RUNNER_TEMP/home"
+          export XDG_CONFIG_HOME="$HOME/.config" # runners set it outside HOME
           DOTFILES_PROFILE=minimal DOTFILES_CODE_DIR=ci-code-dir chezmoi init --promptDefaults --source .
           chezmoi data --source . --format json \
             | jq -e '.profile == "minimal" and .codeDir == "ci-code-dir"'
