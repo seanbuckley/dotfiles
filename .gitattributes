@@ -1,0 +1,4 @@
+# LF everywhere; PowerShell reads LF fine. Only Windows batch files need CRLF.
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
