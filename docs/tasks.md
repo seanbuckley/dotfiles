@@ -248,7 +248,7 @@ Comment standard (applies to both repos):
 - Owner: Sean (agent lists the exact settings)
 - Actions: create labels `parked`, `post-v1`, `bug`, `enhancement`; protect `main` (require the PR and the lint check; no force-push).
 
-### P1.05 Update the shared Core line in other repos
+### P1.05 Update the shared Core line in other repos ✅
 - Owner: agent
 - Objective: the `AGENTS.md` of each private repo that shares the Core section lists `seanbuckley/dotfiles` too. The link runs one way only: this public repo never names those repos.
 - Expected result: one small PR per repo, `docs(meta): add dotfiles to the shared core list`.
