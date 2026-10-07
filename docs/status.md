@@ -72,3 +72,4 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-07 · Sean · P1.03–04 · Merged #3. Labels and `main` ruleset created. `AUDIT_WORDS` set in Actions and Dependabot with a minimal temporary list; full list to follow.
 - 2026-10-07 · agent · P1.05 · Core line updated in the three private repos (one PR each), merged by Sean. #4 merged.
 - 2026-10-07 · Sean · P1.06 · Full `AUDIT_WORDS` in both secrets; audit checklist ticked (#7); repo made public; secret scanning and push protection on; `v0.1.0` Baseline released. Gate 1 done.
+- 2026-10-07 · agent · P2.02 prep · Recorded Sean's call on the `master` aliases in decisions.md (`main`, default-branch `sync`, `undopush` on `main`).
