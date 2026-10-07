@@ -72,12 +72,12 @@ The old `.gitconfig` had three aliases that hard-code `master`. Sean's call, app
 
 ```ini
 [alias]
-	# was `checkout master`
-	main = checkout main
-	# was hard-coded to master; now uses upstream's default branch, so it works in master and main repos
-	sync = "!f() { git fetch upstream -v && git fetch origin -v && git remote set-head upstream --auto >/dev/null && b=$(git symbolic-ref --short refs/remotes/upstream/HEAD) && b=${b#upstream/} && git checkout \"$b\" && git merge \"upstream/$b\"; }; f"
-	# was `push -f origin HEAD^:master`; --force-with-lease refuses if the remote moved since your last fetch
-	undopush = push --force-with-lease origin HEAD^:main
+  # was `checkout master`
+  main = checkout main
+  # was hard-coded to master; now uses upstream's default branch, so it works in master and main repos
+  sync = "!f() { git fetch upstream -v && git fetch origin -v && git remote set-head upstream --auto >/dev/null && b=$(git symbolic-ref --short refs/remotes/upstream/HEAD) && b=${b#upstream/} && git checkout \"$b\" && git merge \"upstream/$b\"; }; f"
+  # was `push -f origin HEAD^:master`; --force-with-lease refuses if the remote moved since your last fetch
+  undopush = push --force-with-lease origin HEAD^:main
 ```
 
 - `undopush` only works on branches with no force-push protection. This repo's `main` ruleset blocks
