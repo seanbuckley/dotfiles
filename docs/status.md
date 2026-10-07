@@ -10,12 +10,12 @@
 | Field | Value |
 |---|---|
 | Phase | **2 Shared core** in progress |
-| Active task | P2.04 editor (PR open) |
-| Last verified step | #14 merged. `env.sh` picks micro, nano, then vi, and keeps a preset `EDITOR` (dash, locally) |
-| Next step | P2.05 work git identity |
-| Open PRs | P2.04 editor |
+| Active task | P2.05 work git identity (PR open) |
+| Last verified step | #15 merged. `includeIf` renders per `workGitDirs` entry, survives re-init, and a repo under it gets the work email (Linux, locally) |
+| Next step | P2.06 dry run on real machines (Sean; agent writes the commands in bootstrap.md) |
+| Open PRs | P2.05 work git identity |
 | Blockers | None |
-| Waiting on Sean | Review P2.04 |
+| Waiting on Sean | Review P2.05 |
 
 ## How to resume (for any agent)
 
@@ -83,3 +83,5 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-07 · agent · P2.03 · `home/dot_config/git/ignore`, OS and editor junk only; CI checks `.DS_Store` is ignored and `a.png`, `.env` aren't.
 - 2026-10-07 · Sean · P2.03 · Merged #14 (global git ignore; curated `.vscode`, no `.idea`).
 - 2026-10-07 · agent · P2.04 · `home/dot_config/shell/env.sh`: `EDITOR`/`VISUAL` micro → nano → vi, preset wins; Unix-only; CI tests the choice.
+- 2026-10-07 · Sean · P2.04 · Merged #15 (editor); vi confirmed as the last resort (D10).
+- 2026-10-07 · agent · P2.05 · `includeIf` per machine-local `workGitDirs` → `~/.gitconfig_work`; config template keeps the list across `chezmoi init`; CI tests it.
