@@ -9,13 +9,13 @@
 
 | Field | Value |
 |---|---|
-| Phase | **1 Baseline** done; **2 Shared core** next |
-| Active task | None; gate 1 review with Sean before Phase 2 |
+| Phase | **2 Shared core** (in progress) |
+| Active task | Phase 2 tasks detailed; P2.01 next |
 | Last verified step | Repo public; `v0.1.0` Baseline released (tag on `8d80c73`, tip of `main`); secret scanning + push protection on |
-| Next step | P2.01 chezmoi skeleton (detail Phase 2 tasks first) |
-| Open PRs | Status update (this change) |
+| Next step | P2.01 chezmoi skeleton |
+| Open PRs | Phase 2 task detail (this change) |
 | Blockers | None |
-| Waiting on Sean | Go-ahead for Phase 2 |
+| Waiting on Sean | Review the Phase 2 task list |
 
 ## How to resume (for any agent)
 
@@ -72,3 +72,5 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-07 · Sean · P1.03–04 · Merged #3. Labels and `main` ruleset created. `AUDIT_WORDS` set in Actions and Dependabot with a minimal temporary list; full list to follow.
 - 2026-10-07 · agent · P1.05 · Core line updated in the three private repos (one PR each), merged by Sean. #4 merged.
 - 2026-10-07 · Sean · P1.06 · Full `AUDIT_WORDS` in both secrets; audit checklist ticked (#7); repo made public; secret scanning and push protection on; `v0.1.0` Baseline released. Gate 1 done.
+- 2026-10-07 · Sean · Gate 1 · Go-ahead for Phase 2.
+- 2026-10-07 · agent · Phase 2 · Detailed P2.01–P2.06 in tasks.md.
