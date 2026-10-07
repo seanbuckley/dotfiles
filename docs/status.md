@@ -13,9 +13,9 @@
 | Active task | P1.02 repo scaffolding |
 | Last verified step | P1.01 snapshot audited: gitleaks clean, private-words list run by Sean, private repo names removed |
 | Next step | P1.03 CI (incl. private-words job; ★ Sean adds the `AUDIT_WORDS` secret), then P1.04 labels and branch protection |
-| Open PRs | [seanbuckley/dotfiles#1](https://github.com/seanbuckley/dotfiles/pull/1) (P1.01 snapshot), P1.02 (this change) |
+| Open PRs | P1.02 repo scaffolding (this change). P1.01 snapshot merged as [#1](https://github.com/seanbuckley/dotfiles/pull/1) |
 | Blockers | None |
-| Waiting on Sean | Review and merge #1, then the P1.02 PR |
+| Waiting on Sean | Review and merge the P1.02 PR |
 
 ## How to resume (for any agent)
 
@@ -65,4 +65,5 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-05 · Sean · P0e.02 · chezmoi spike done on WSL and Windows. Works; reservation about one more abstraction layer (see decisions.md).
 - 2026-10-05 · Sean · P0e.03–04 · Repointed clones (one retired machine skipped); renamed to `dotfiles-legacy`; created the new repo with an empty first commit; gate 0e done.
 - 2026-10-05 · agent · P1.01 · Snapshot PR #1: 58 files, gitleaks clean, private repo names removed after Sean's word-list run.
+- 2026-10-07 · Sean · P1.01 · Merged #1. D10 editor (micro → nano, neovim installed) confirmed unchanged.
 - 2026-10-06 · agent · P1.02 · Moved `docs/` here, scrubbed private repo names and hostnames, fixed old issue links to `dotfiles-legacy`; added the private-words layer to security.md and P1.03.
