@@ -203,6 +203,23 @@ jobs:
           chezmoi data --source . --format json > "$RUNNER_TEMP/data.json"
           jq '{profile, name, email, codeDir, osID, isWSL, isOmarchy}' "$RUNNER_TEMP/data.json"
           jq -e '.profile == "workstation" and .name == "Sean Buckley"' "$RUNNER_TEMP/data.json"
+      - name: Apply, then check the rendered git config
+        run: |
+          export HOME="$RUNNER_TEMP/home" USERPROFILE="$RUNNER_TEMP/home"
+          chezmoi apply --source .
+          chezmoi verify --source .
+          # git reads ~/.gitconfig (and its includes) from the throwaway home.
+          git config --global --list > /dev/null
+          test "$(git config --global user.email)" = seanbuckley@users.noreply.github.com
+          test "$(git config --global alias.main)" = "checkout main"
+          if git config --global core.editor; then
+            echo "::error::core.editor is set; the editor comes from EDITOR (D10)."
+            exit 1
+          fi
+          # ~/.gitconfig_local must be the last include, so local settings win.
+          git config --file "$HOME/.gitconfig" --get-all include.path | tail -n 1 \
+            | grep -qx '~/.gitconfig_local'
+          git aliases | grep -q '^alias\.whoami '
       - name: Env overrides win over defaults
         run: |
           export HOME="$RUNNER_TEMP/home" USERPROFILE="$RUNNER_TEMP/home"
