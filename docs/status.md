@@ -10,9 +10,9 @@
 | Field | Value |
 |---|---|
 | Phase | **1 Baseline** (in progress) |
-| Active task | P1.05 one-way Core pointers in the private repos |
-| Last verified step | P1.03 merged as [#3](https://github.com/seanbuckley/dotfiles/pull/3), all 7 checks green; P1.04 labels and `main` ruleset done by Sean |
-| Next step | P1.05, then P1.06 go public (★ Sean) |
+| Active task | None; waiting on Sean for P1.06 |
+| Last verified step | P1.05: the three private repos' Core line lists this repo (one-way); all merged |
+| Next step | ★ P1.06 go public and release v0.1.0 (after the full `AUDIT_WORDS` list) |
 | Open PRs | Status update (this change) |
 | Blockers | **P1.06 is blocked** until `AUDIT_WORDS` (Actions + Dependabot) holds the full word list and CI is re-run green. Both copies hold a minimal temporary list today |
 | Waiting on Sean | Full `AUDIT_WORDS` list in both secrets, then re-run `lint` on `main` |
@@ -70,3 +70,4 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-07 · Sean · P1.02 · Merged #2; vault link fix merged in the vault.
 - 2026-10-07 · agent · P1.03 · Added `lint.yml` (7 jobs) and Dependabot for Actions; all 7 jobs green on the PR, including private words with the Actions secret.
 - 2026-10-07 · Sean · P1.03–04 · Merged #3. Labels and `main` ruleset created. `AUDIT_WORDS` set in Actions and Dependabot with a minimal temporary list; full list to follow.
+- 2026-10-07 · agent · P1.05 · Core line updated in the three private repos (one PR each), merged by Sean. #4 merged.
