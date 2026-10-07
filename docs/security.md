@@ -32,17 +32,19 @@ checking happens *before* the visibility flip, not after.
 
 Run by the agent, then reviewed by Sean.
 
-- [ ] `gitleaks detect --no-git --source .` → no findings
-- [ ] `gitleaks detect --source .` (history of the new repo) → no findings
-- [ ] Search tracked files for each item; each hit is fixed or explicitly accepted:
-  - [ ] private IPs: `rg -n '\b(10|172\.(1[6-9]|2[0-9]|3[01])|192\.168)\.[0-9]+\.[0-9]+'`
-  - [ ] emails: `rg -n '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}'`, where only `users.noreply.github.com` is allowed
-  - [ ] user paths: `rg -n -i 'C:\\\\Users\\\\|/home/[a-z]|/Users/[a-z]'`
-  - [ ] token shapes: `rg -n 'ghp_|gho_|github_pat_|sk-|xox[bap]-|AKIA|-----BEGIN'`
-  - [ ] names: company/tenant names, the work-machine name, the redirected-folder server name, LAN hostnames. The **list of words is kept outside the repo** by Sean and passed to `rg -f`
-- [ ] No `Tabby/`, `.hyper.js`, legacy `Windows Terminal/settings.json` or `.vscode/` in `legacy/`
-- [ ] `legacy/linux/scripts/repos-install.sh`: the private repo names are OK to show (they aren't secret), or moved to local data. Sean decides
-- [ ] Sean reads the whole `git ls-files` list once
+Last run 2026-10-07 on `main` (`ed84efb`, 82 files). Every item below except the last is done.
+
+- [x] `gitleaks detect --no-git --source .` → no findings (also every PR, in CI)
+- [x] `gitleaks detect --source .` (history of the new repo) → no findings (also every PR, in CI)
+- [x] Search tracked files for each item; each hit is fixed or explicitly accepted:
+  - [x] private IPs: `rg -n '\b(10|172\.(1[6-9]|2[0-9]|3[01])|192\.168)\.[0-9]+\.[0-9]+'` → none
+  - [x] emails: `rg -n '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}'`, where only `users.noreply.github.com` is allowed → only `git@github.com` SSH URLs and an `x@y.com` placeholder in `legacy/linux/.p10k.zsh`. Accepted
+  - [x] user paths: `rg -n -i 'C:\\\\Users\\\\|/home/[a-z]|/Users/[a-z]'` → only `/home/linuxbrew` (Homebrew's standard prefix), generic `<name>` placeholders, `.p10k.zsh` comments and the `Test-Dotfiles.ps1` detection regex. Accepted
+  - [x] token shapes: `rg -n 'ghp_|gho_|github_pat_|sk-|xox[bap]-|AKIA|-----BEGIN'` → only false positives (`task-id`, `task-files`, this line). Accepted
+  - [x] names: Sean ran the word list locally (2026-10-05); CI's `private-words` job passed on `main` with the full list (2026-10-07). Private repo names were removed; Sean's own name, noreply email and `buckley.ca` are public on purpose
+- [x] No `Tabby/`, `.hyper.js`, legacy `Windows Terminal/settings.json` or `.vscode/` in `legacy/`
+- [x] `legacy/linux/scripts/repos-install.sh`: private repo names removed (Sean, 2026-10-05); only `seanbuckley/dotfiles` remains
+- [ ] Sean reads the whole `git ls-files` list once. The 58 `legacy/` files were listed in PR [#1](https://github.com/seanbuckley/dotfiles/pull/1) (legacy snapshot); the other 24 (root files, `.github/`, `docs/`) still need a read
 
 ## Findings to date (2026-09-30)
 
