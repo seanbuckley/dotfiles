@@ -270,3 +270,41 @@ jobs:
             echo "::error::An unknown DOTFILES_PROFILE was accepted."
             exit 1
           fi
+      - name: Work identity (includeIf per workGitDirs)
+        run: |
+          export HOME="$RUNNER_TEMP/home" USERPROFILE="$RUNNER_TEMP/home"
+          export XDG_CONFIG_HOME="$HOME/.config" # runners set it outside HOME
+          cfg="$XDG_CONFIG_HOME/chezmoi/chezmoi.toml"
+          chezmoi apply --source .
+          if grep -q includeIf "$HOME/.gitconfig"; then
+            echo "::error::An empty workGitDirs must render no includeIf."
+            exit 1
+          fi
+          # A config made before workGitDirs existed has no key; apply (no re-init)
+          # must still work and render no includeIf.
+          grep -v '^  workGitDirs = ' "$cfg" > "$cfg.old"
+          cp "$cfg" "$cfg.bak" && mv "$cfg.old" "$cfg"
+          if grep -q workGitDirs "$cfg"; then exit 1; fi
+          chezmoi apply --source .
+          if grep -q includeIf "$HOME/.gitconfig"; then
+            echo "::error::A missing workGitDirs key must render no includeIf."
+            exit 1
+          fi
+          mv "$cfg.bak" "$cfg"
+          # Add a work dir by hand, as on a real machine (TOML literal string, so
+          # Windows backslashes need no escaping), then re-init: it must survive.
+          # Brackets in the name must match literally, not as a glob class.
+          work="$RUNNER_TEMP/work[1]"
+          W="$work" awk '/^  workGitDirs = /{print "  workGitDirs = [\047" ENVIRON["W"] "\047]"; next} {print}' \
+            "$cfg" > "$cfg.new" && mv "$cfg.new" "$cfg"
+          chezmoi init --promptDefaults --source .
+          grep -q '^  workGitDirs = \[".' "$cfg"
+          chezmoi apply --source .
+          git config --global --list > /dev/null
+          git config --file "$HOME/.gitconfig_work" user.email work@example.invalid
+          git init -q "$work/repo"
+          test "$(git -C "$work/repo" config user.email)" = work@example.invalid
+          git init -q "$RUNNER_TEMP/work1/repo"
+          test "$(git -C "$RUNNER_TEMP/work1/repo" config user.email)" = seanbuckley@users.noreply.github.com
+          git init -q "$RUNNER_TEMP/personal"
+          test "$(git -C "$RUNNER_TEMP/personal" config user.email)" = seanbuckley@users.noreply.github.com

@@ -24,6 +24,7 @@ checking happens *before* the visibility flip, not after.
 |---|---|
 | Git identity, work email | `chezmoi init` answers → `~/.config/chezmoi/chezmoi.toml` |
 | Work git config, signing key | `~/.gitconfig_local` |
+| Work repo folders, work identity | `workGitDirs` under `[data]` in `~/.config/chezmoi/chezmoi.toml`; name, email and signing key in `~/.gitconfig_work` |
 | Machine-only shell settings | `~/.zshrc.local`, `Microsoft.PowerShell_profile.local.ps1` |
 | List of private repos to clone | Local chezmoi data or `~/.config/dotfiles/repos.txt`, not the repo |
 | Real secrets (if ever needed) | Password manager, or chezmoi's built-in `age` encryption (fits the SOPS + age setup used in the homelab repo). **Not the Bitwarden CLI** |

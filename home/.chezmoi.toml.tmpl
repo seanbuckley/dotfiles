@@ -28,6 +28,14 @@
 {{-   $codeDir = promptStringOnce . "codeDir" "Code folder" (joinPath .chezmoi.homeDir "code") -}}
 {{- end -}}
 
+{{- /* Work repos that use ~/.gitconfig_work (P2.05). Never asked and never in
+     the repo: add `workGitDirs = ["~/work/"]` under [data] in the machine's
+     chezmoi.toml by hand. Kept here so `chezmoi init` doesn't drop it. */ -}}
+{{- $workGitDirs := list -}}
+{{- if hasKey . "workGitDirs" -}}
+{{-   $workGitDirs = .workGitDirs -}}
+{{- end -}}
+
 {{- /* Derived, never asked. */ -}}
 {{- $osID := .chezmoi.os -}}
 {{- $isWSL := false -}}
@@ -52,3 +60,4 @@
   osID = {{ $osID | quote }}
   isWSL = {{ $isWSL }}
   isOmarchy = {{ $isOmarchy }}
+  workGitDirs = [{{ range $i, $d := $workGitDirs }}{{ if $i }}, {{ end }}{{ $d | quote }}{{ end }}]

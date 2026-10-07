@@ -172,6 +172,20 @@
   submodules = submodule
   tags = tag
 
+{{- /* hasKey: configs made before workGitDirs existed lack the key until re-init */ -}}
+{{- if hasKey . "workGitDirs" }}
+{{-   if .workGitDirs }}
+
+# Work identity for repos under each workGitDirs entry (machine-local chezmoi
+# data). ~/.gitconfig_work holds the work name, email and signing key; the repo
+# never creates it. gitdir is a glob, so [ * ? are wrapped in [] to match literally.
+{{-     range .workGitDirs }}
+[includeIf "gitdir{{ if eq $.chezmoi.os "windows" }}/i{{ end }}:{{ . | replace "\\" "/" | trimSuffix "/" | replace "[" "[[]" | replace "*" "[*]" | replace "?" "[?]" | replace "\"" "\\\"" }}/"]
+  path = ~/.gitconfig_work
+{{-     end }}
+{{-   end }}
+{{- end }}
+
 # Per-machine settings: work identity, signing key, editor. Last, so it wins.
 [include]
   path = ~/.gitconfig_local
