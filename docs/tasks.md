@@ -207,7 +207,7 @@ Comment standard (applies to both repos):
 
 ## Phase 1: Baseline (fresh repo) → v0.1.0
 
-### P1.01 Snapshot the old repos into `legacy/`
+### P1.01 Snapshot the old repos into `legacy/` ✅
 - Owner: agent
 - Objective: the first commit captures the current files of both repos, without history.
 - Actions:
@@ -222,7 +222,7 @@ Comment standard (applies to both repos):
 - Expected result: commit `chore(legacy): snapshot old repos at pre-merge-baseline`.
 - Stop if: gitleaks or the checklist finds anything. Report it; don't "fix and continue".
 
-### P1.02 Repo scaffolding
+### P1.02 Repo scaffolding ✅
 - Owner: agent
 - Files:
   - `README.md` (what this is, supported OSes, "status: migration in progress", link to `docs/`)
@@ -235,7 +235,7 @@ Comment standard (applies to both repos):
 - Validation: `git diff --check`; `editorconfig-checker` if available.
 - Expected result: PR `chore(repo): add repo scaffolding, agent files and docs`.
 
-### P1.03 CI quality gates
+### P1.03 CI quality gates ✅
 - Owner: agent
 - Files: `.github/workflows/lint.yml`, `.github/dependabot.yml` (GitHub Actions updates only).
 - Actions: jobs from [testing.md](testing.md#quality-gates): shellcheck + shfmt, PSScriptAnalyzer, gitleaks, private words, JSON/YAML/TOML parse, markdown link check. In Phase 1 these run on `docs/` and root files only; `legacy/` is excluded from lint but **included** in gitleaks and the private-words check.
@@ -244,7 +244,7 @@ Comment standard (applies to both repos):
 - Expected result: PR `feat(ci): add lint and secret-scan workflow`.
 - Stop if: an action needs a secret or token beyond `GITHUB_TOKEN` and `AUDIT_WORDS`.
 
-### P1.04 Labels and branch protection ★
+### P1.04 Labels and branch protection ★ ✅
 - Owner: Sean (agent lists the exact settings)
 - Actions: create labels `parked`, `post-v1`, `bug`, `enhancement`; protect `main` (require the PR and the lint check; no force-push).
 
@@ -256,7 +256,7 @@ Comment standard (applies to both repos):
 ### P1.06 Go public and release v0.1.0 ★
 - Owner: Sean
 - Actions:
-  1. Re-read [security.md](security.md) findings.
+  1. Re-read [security.md](security.md) findings. Confirm both `AUDIT_WORDS` secrets hold the **full** word list (not a temporary one) and that the latest `lint` run on `main` used it and is green.
   2. Settings → change visibility to public.
   3. Tag `v0.1.0` and publish a GitHub Release, "Baseline", with notes from [migration-plan.md](migration-plan.md#what-each-release-means).
 - Rollback: set back to private. **Anything already public may have been cached**; that's why the audit comes first.

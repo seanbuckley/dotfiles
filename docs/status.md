@@ -10,12 +10,12 @@
 | Field | Value |
 |---|---|
 | Phase | **1 Baseline** (in progress) |
-| Active task | P1.03 CI quality gates |
-| Last verified step | P1.02 merged as [#2](https://github.com/seanbuckley/dotfiles/pull/2) |
-| Next step | P1.04 labels and branch protection (★ Sean) |
-| Open PRs | P1.03 `lint.yml` (this change) |
-| Blockers | None |
-| Waiting on Sean | Review the P1.03 PR; confirm the Dependabot copy of `AUDIT_WORDS` |
+| Active task | P1.05 one-way Core pointers in the private repos |
+| Last verified step | P1.03 merged as [#3](https://github.com/seanbuckley/dotfiles/pull/3), all 7 checks green; P1.04 labels and `main` ruleset done by Sean |
+| Next step | P1.05, then P1.06 go public (★ Sean) |
+| Open PRs | Status update (this change) |
+| Blockers | **P1.06 is blocked** until `AUDIT_WORDS` (Actions + Dependabot) holds the full word list and CI is re-run green. Both copies hold a minimal temporary list today |
+| Waiting on Sean | Full `AUDIT_WORDS` list in both secrets, then re-run `lint` on `main` |
 
 ## How to resume (for any agent)
 
@@ -69,3 +69,4 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-06 · agent · P1.02 · Moved `docs/` here, scrubbed private repo names and hostnames, fixed old issue links to `dotfiles-legacy`; added the private-words layer to security.md and P1.03.
 - 2026-10-07 · Sean · P1.02 · Merged #2; vault link fix merged in the vault.
 - 2026-10-07 · agent · P1.03 · Added `lint.yml` (7 jobs) and Dependabot for Actions; all 7 jobs green on the PR, including private words with the Actions secret.
+- 2026-10-07 · Sean · P1.03–04 · Merged #3. Labels and `main` ruleset created. `AUDIT_WORDS` set in Actions and Dependabot with a minimal temporary list; full list to follow.
