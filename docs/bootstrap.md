@@ -77,6 +77,75 @@ DOTFILES_PROFILE=minimal sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply --
 | SSH keys, `gh auth login` | ❌ manual | Personal and interactive. Never automated |
 | Anything destructive (deleting files or folders) | ❌ never | Not part of bootstrap |
 
+## Phase 2 dry run (P2.06)
+
+Run this once on WSL and once on Windows. It shows what the shared core would change, and
+applies it only if you choose to. Phase 2 manages four files: `~/.gitconfig`,
+`~/.config/git/ignore`, `~/.config/gitalias/gitalias.txt` and, on Linux and WSL only,
+`~/.config/shell/env.sh`.
+
+**WSL**
+
+```sh
+# 1. Install chezmoi (2.73.0 or newer) to ~/.local/bin
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
+chezmoi --version   # open a new shell first if it isn't found
+
+# 2. Back up what it will replace
+cp ~/.gitconfig ~/.gitconfig.pre-chezmoi
+[ -f ~/.config/git/ignore ] && cp ~/.config/git/ignore ~/.config/git/ignore.pre-chezmoi
+
+# 3. Clone into ~/.local/share/chezmoi and answer the questions (no --apply)
+chezmoi init seanbuckley
+```
+
+**Windows** (PowerShell, normal user, not elevated)
+
+```powershell
+# 1. Install chezmoi (2.73.0 or newer)
+winget install --id twpayne.chezmoi -e
+chezmoi --version   # open a new terminal first if it isn't found
+
+# 2. Back up what it will replace
+Copy-Item ~\.gitconfig ~\.gitconfig.pre-chezmoi
+if (Test-Path ~\.config\git\ignore) { Copy-Item ~\.config\git\ignore ~\.config\git\ignore.pre-chezmoi }
+
+# 3. Clone into ~\.local\share\chezmoi and answer the questions (no --apply)
+chezmoi init seanbuckley
+```
+
+Then, on both:
+
+4. Move anything machine-specific out of the old `~/.gitconfig` before reading the diff:
+   signing key, editor and other per-machine settings into `~/.gitconfig_local`; work name
+   and email into `~/.gitconfig_work`. For a work identity, run `chezmoi edit-config` and add
+   `workGitDirs = ["<work repos folder>"]` under `[data]`.
+5. Read the diff: `chezmoi diff`. It downloads GitAlias, so it needs network.
+6. Expected: only the four files above change, and the new `~/.gitconfig` matches the
+   P2.02–P2.05 PRs (noreply email, `includeIf` only if you set `workGitDirs`,
+   `~/.gitconfig_local` included last). `chezmoi managed` lists every path it would touch.
+7. Optional: `chezmoi apply`, then `chezmoi verify` (silent when everything matches) and
+   `git config --show-origin user.email` inside a personal repo and a work repo. Or skip
+   applying until Phase 6.
+   On Windows, don't re-run the old `Install-Dotfiles.ps1` afterwards: it adds its
+   `[include]` back into `~/.gitconfig`.
+
+Stop and tell the agent if the diff changes anything else, or if `chezmoi diff` or
+`chezmoi apply` asks a question.
+
+Undo: `chezmoi purge` removes chezmoi's clone, config and state but leaves your files.
+If you applied, also restore the backups:
+`mv ~/.gitconfig.pre-chezmoi ~/.gitconfig` (and the same for `ignore`).
+
+Gate 2: when both machines look right, tick gate 2 in [status.md](status.md#gates), then tag
+`main` from your own checkout:
+
+```sh
+git switch main && git pull --ff-only
+git tag -a v0.2.0 -m "Shared core"
+git push origin v0.2.0
+```
+
 ## Cutover an existing machine
 
 For Phase 6: moving a machine from the old repos to this one.
