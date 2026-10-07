@@ -11,7 +11,7 @@
 |---|---|
 | Phase | **2 Shared core** in progress |
 | Active task | P2.03 global git ignore |
-| Last verified step | #12, #13 merged. Global ignore applied in a throwaway home: `.DS_Store` ignored, `a.png` and `.env` not (Linux) |
+| Last verified step | #12, #13 merged. Global ignore applied in a throwaway home: `.DS_Store` ignored, `a.png` and `.env` not (CI: Linux + Windows) |
 | Next step | P2.04 editor |
 | Open PRs | P2.03 global git ignore |
 | Blockers | None |

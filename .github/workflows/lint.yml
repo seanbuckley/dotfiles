@@ -225,8 +225,10 @@ jobs:
           # Global ignore: OS/editor junk only, never project files.
           git init -q "$RUNNER_TEMP/ignore-test"
           cd "$RUNNER_TEMP/ignore-test"
-          git check-ignore -q x/.DS_Store
-          for f in x/a.png x/.env; do
+          for f in x/.DS_Store .vscode/state.json; do
+            git check-ignore -q "$f" || { echo "::error::$f should be ignored."; exit 1; }
+          done
+          for f in x/a.png x/.env .vscode/settings.json .vscode/extensions.json .idea/vcs.xml; do
             if git check-ignore -q "$f"; then
               echo "::error::The global ignore hides $f; keep it to OS and editor junk."
               exit 1

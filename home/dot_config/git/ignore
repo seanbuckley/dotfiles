@@ -1,7 +1,7 @@
 # Global git ignore: ~/.config/git/ignore, git's default path on every OS (no
-# core.excludesFile needed, unless XDG_CONFIG_HOME points elsewhere). OS and
-# editor junk only. Anything a project should
-# ignore (build output, .env, images) belongs in that project's own .gitignore.
+# core.excludesFile needed, unless XDG_CONFIG_HOME points elsewhere).
+# OS and editor junk only. Anything a project should ignore (build output, .env,
+# images, .idea/) belongs in that project's own .gitignore.
 
 # OS
 .DS_Store
@@ -11,8 +11,13 @@ desktop.ini
 # Editors
 *~
 *.swp
-.idea/
-.vscode/
+
+# VS Code machine/user state; keep the shared workspace files a repo may commit
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
 
 # Local-only files (docs/security.md)
 *.local
