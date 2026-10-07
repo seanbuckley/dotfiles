@@ -9,13 +9,13 @@
 
 | Field | Value |
 |---|---|
-| Phase | **2 Shared core** (in progress) |
-| Active task | Phase 2 tasks detailed; P2.01 next |
-| Last verified step | Repo public; `v0.1.0` Baseline released (tag on `8d80c73`, tip of `main`); secret scanning + push protection on |
-| Next step | P2.01 chezmoi skeleton |
-| Open PRs | Phase 2 task detail (this change) |
+| Phase | **2 Shared core** in progress |
+| Active task | P2.01 chezmoi skeleton (PR open) |
+| Last verified step | `chezmoi` CI job green on ubuntu + windows; env overrides and a bad profile tested |
+| Next step | P2.02 one git config, once P2.01 merges |
+| Open PRs | [#11](https://github.com/seanbuckley/dotfiles/pull/11) (P2.01 chezmoi skeleton) |
 | Blockers | None |
-| Waiting on Sean | Review the Phase 2 task list |
+| Waiting on Sean | Merge #11; then add `chezmoi (ubuntu-latest)` and `chezmoi (windows-latest)` to the `main` ruleset |
 
 ## How to resume (for any agent)
 
@@ -75,3 +75,4 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-07 · Sean · Gate 1 · Go-ahead for Phase 2.
 - 2026-10-07 · agent · Phase 2 · Detailed P2.01–P2.06 in tasks.md.
 - 2026-10-07 · agent · P2.02 prep · Recorded Sean's call on the `master` aliases in decisions.md (`main`, default-branch `sync`, `undopush` on `main`).
+- 2026-10-07 · agent · P2.01 · chezmoi skeleton: `.chezmoiroot`, config template with `DOTFILES_*` overrides, OS-gating `.chezmoiignore`, `chezmoi` CI job on ubuntu + windows.
