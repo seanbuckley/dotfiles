@@ -21,7 +21,9 @@ Added in P1.03 and extended as code lands.
 | Private words | `rg -l -i -w -f` with the `AUDIT_WORDS` Actions secret ([security.md](security.md#private-words)) | whole repo, including `legacy/`; prints file names only |
 | JSON / YAML / TOML parse | `jq`, `yq`, `taplo` (or a small Python check) | config files |
 | Markdown links | `lychee` (offline mode for relative links, plus external links weekly) | `*.md` |
-| Line endings | `git diff --check` + `.editorconfig` check | everything |
+| Line endings | `editorconfig-checker` (indent-size check off: Markdown list continuations) | everything outside `legacy/` |
+
+Tool versions are pinned in `lint.yml`'s `env`; only `actions/checkout` is a third-party action, pinned by SHA and updated by Dependabot.
 
 `legacy/` is excluded from lint (it's frozen) but **not** from gitleaks or the private-words check.
 
