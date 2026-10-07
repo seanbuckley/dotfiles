@@ -10,12 +10,12 @@
 | Field | Value |
 |---|---|
 | Phase | **2 Shared core** in progress |
-| Active task | P2.06 dry run on real machines (commands in bootstrap.md, PR open) |
+| Active task | P2.06 dry run on real machines (Sean, in progress on Windows) |
 | Last verified step | #16 merged (work identity, with review fixes). `chezmoi managed` lists the four Phase 2 files |
 | Next step | Sean runs the [Phase 2 dry run](bootstrap.md#phase-2-dry-run-p206) on WSL and Windows, ticks gate 2, tags `v0.2.0` |
-| Open PRs | P2.06 dry-run commands |
+| Open PRs | Global ignore: Claude Code local settings |
 | Blockers | None |
-| Waiting on Sean | Review P2.06, then the dry run |
+| Waiting on Sean | Dry run on Windows and WSL; review the ignore PR |
 
 ## How to resume (for any agent)
 
@@ -88,3 +88,4 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-07 · agent · P2.05 · Review fixes: a config without `workGitDirs` still applies; glob characters in folder names match literally. CI covers both.
 - 2026-10-07 · Sean · P2.05 · Merged #16.
 - 2026-10-07 · agent · P2.06 · Dry-run commands for WSL and Windows in bootstrap.md.
+- 2026-10-07 · agent · P2.03 follow-up · Global ignore keeps Claude Code's `**/.claude/settings.local.json` line, found on Sean's PC during the P2.06 dry run.

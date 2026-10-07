@@ -19,6 +19,10 @@ desktop.ini
 !.vscode/tasks.json
 !.vscode/launch.json
 
+# Claude Code per-user settings; the shared .claude/settings.json stays tracked.
+# Same line Claude Code adds itself, so it doesn't append a duplicate.
+**/.claude/settings.local.json
+
 # Local-only files (docs/security.md)
 *.local
 audit-words.txt
