@@ -10,12 +10,12 @@
 | Field | Value |
 |---|---|
 | Phase | **2 Shared core** in progress |
-| Active task | P2.01 chezmoi skeleton (PR open) |
-| Last verified step | `chezmoi` CI job green on ubuntu + windows; env overrides and a bad profile tested |
-| Next step | P2.02 one git config, once P2.01 merges |
-| Open PRs | [#11](https://github.com/seanbuckley/dotfiles/pull/11) (P2.01 chezmoi skeleton) |
+| Active task | P2.02 one git config (PR open) |
+| Last verified step | P2.01 merged (#11). Rendered `~/.gitconfig` applies, parses and runs aliases in a throwaway home (Linux, chezmoi 2.73.0) |
+| Next step | P2.03 global git ignore |
+| Open PRs | P2.02 one git config |
 | Blockers | None |
-| Waiting on Sean | Merge #11; then add `chezmoi (ubuntu-latest)` and `chezmoi (windows-latest)` to the `main` ruleset |
+| Waiting on Sean | Review P2.02's "for review" list; `chezmoi` required checks in the `main` ruleset if not added yet |
 
 ## How to resume (for any agent)
 
@@ -76,3 +76,5 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-07 · agent · Phase 2 · Detailed P2.01–P2.06 in tasks.md.
 - 2026-10-07 · agent · P2.02 prep · Recorded Sean's call on the `master` aliases in decisions.md (`main`, default-branch `sync`, `undopush` on `main`).
 - 2026-10-07 · agent · P2.01 · chezmoi skeleton: `.chezmoiroot`, config template with `DOTFILES_*` overrides, OS-gating `.chezmoiignore`, `chezmoi` CI job on ubuntu + windows.
+- 2026-10-07 · Sean · P2.01 · Merged #9 (phase 2 task detail) and #11 (chezmoi skeleton).
+- 2026-10-07 · agent · P2.02 · `home/dot_gitconfig.tmpl` merged from both legacy copies; gitalias as a chezmoi external; CI applies and checks it.

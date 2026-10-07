@@ -1,0 +1,177 @@
+# ==============================================================================
+# ~/.gitconfig: global git settings, rendered by chezmoi for every OS.
+#
+# Managed file: edit home/dot_gitconfig.tmpl in the dotfiles repo, not this copy.
+# `git config --global` still writes here, and the next `chezmoi apply` undoes it,
+# so put per-machine settings in ~/.gitconfig_local (included last, so it wins).
+# Optional tools (delta, git-lfs, gh) are detected when chezmoi renders this file;
+# run `chezmoi apply` again after installing one.
+# ==============================================================================
+
+[user]
+  name = {{ .name }}
+  email = {{ .email }}
+
+# Shared alias list (home/.chezmoiexternal.toml). Included before [alias] below,
+# so a name defined here wins over GitAlias.
+[include]
+  path = ~/.config/gitalias/gitalias.txt
+{{- if lookPath "git-lfs" }}
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+{{- end }}
+{{- if lookPath "gh" }}
+
+# GitHub hosts ask the GitHub CLI for credentials. The empty `helper =` clears any
+# helper set earlier (system config, GCM), so only gh is used for these hosts.
+# Other hosts keep the OS default (Git Credential Manager on Windows).
+[credential "https://github.com"]
+  helper =
+  helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+  helper =
+  helper = !gh auth git-credential
+{{- end }}
+{{- if lookPath "delta" }}
+
+[core]
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+[delta]
+  navigate = true # n and N move between diff sections
+  hyperlinks = true
+{{- end }}
+
+# --- Behaviour kept from the old configs -------------------------------------
+[init]
+  defaultBranch = main
+[merge]
+  conflictStyle = zdiff3 # show the common ancestor in conflicts
+[pull]
+  rebase = true
+[rebase]
+  autoStash = true # put local edits aside during a rebase
+  autoSquash = true # apply fixup!/squash! commits automatically
+  updateRefs = true # core-dev default: move stacked branches along with a rebase
+[rerere]
+  enabled = true # remember conflict resolutions and replay them
+  autoupdate = true
+
+# --- Defaults git core developers use (docs/research.md) ----------------------
+[branch]
+  sort = -committerdate # most recently used branches first
+[tag]
+  sort = version:refname # v1.10 after v1.9
+[column]
+  ui = auto # list branches and tags in columns
+[diff]
+  algorithm = histogram # clearer diffs when code moves
+  colorMoved = plain # colour moved lines differently from added/removed
+  mnemonicPrefix = true # i/ w/ c/ instead of a/ b/
+  renames = true
+[push]
+  autoSetupRemote = true # first push of a new branch sets its upstream
+  followTags = true # push annotated tags that point at pushed commits
+[fetch]
+  prune = true # drop remote-tracking branches deleted on the remote
+  pruneTags = true
+[help]
+  autocorrect = prompt # offer to run the command a typo most likely meant
+[commit]
+  verbose = true # show the diff in the commit message editor
+
+[alias]
+  aliases = config --get-regexp alias
+  amend = commit -a --amend
+  bl = blame -w -M -C
+  br = branch -rav
+  branches = branch -rav
+  changed = status -sb
+  ci = commit
+  co = checkout
+  co-recurse = !sh -c 'git checkout $1 && git submodule update --recursive' - # Checkout a repo and its (recursive) submodules
+  cob = checkout -b
+  cp = cherry-pick
+  df = diff
+  dc = diff --cached # Shows the difference between the current branch and the staged files
+  dump = cat-file -p
+  filelog = log -u
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  last = log -p --max-count=1 --word-diff
+  lastref = rev-parse --short HEAD
+  lasttag = describe --tags --abbrev=0
+  lc = log ORIG_HEAD.. --stat --no-merges # List all new commits after you fetched, with stats, but excluding merges
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches --date=relative
+  llog = log --date=local # Just like git log, but will display dates in local timezone
+  # was `checkout master` (docs/decisions.md, git aliases that hard-coded master)
+  main = checkout main
+  new = !sh -c 'git log $1@{1}..$1@{0} "$@"' # See what new commits have been created by the last command (typically after a "git pull")
+  pick = add -p
+  pf = !"git fetch --all; git reset --hard HEAD; git merge @{u}" # Pull and overwrite local changes
+  ps = !"git fetch --all; git stash; git merge @{u}; git stash pop" # Pull and stash local changes
+  prune-all = !git remote | xargs -n 1 git remote prune # Prune all stale remote branches
+  ra = rebase --abort # Use if you have trouble with merge conflict
+  rc = rebase --continue # Use after resolving conflicts
+  remotes = remote -v show
+  rs = rebase --skip # Nothing to resolve move along
+  st = status
+  # uses upstream's default branch, so it works in master and main repos
+  sync = "!f() { git fetch upstream -v && git fetch origin -v && git remote set-head upstream --auto >/dev/null && b=$(git symbolic-ref --short refs/remotes/upstream/HEAD) && b=${b#upstream/} && git checkout \"$b\" && git merge \"upstream/$b\"; }; f"
+  type = cat-file -t
+  undo = reset HEAD~
+  # --force-with-lease refuses if the remote moved since your last fetch; rejected on protected branches
+  undopush = push --force-with-lease origin HEAD^:main
+  unstage = reset HEAD
+  untrack = rm --cached -- # Untrack a file
+  up = !git remote update -p; git merge --ff-only @{u} # @{u} points to the upstream branch
+  wdiff = diff --word-diff
+  whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short # Get project history from a commit name
+  who = shortlog -s -e --
+  whoami = !git config user.name && git config user.email
+  whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -" # Get project history from a name or email address
+
+  # typos
+  ad = add
+  bisec = bisect
+  bisetc = bisect
+  branhc = branch
+  breach = branch
+  breanch = branch
+  checkotu = checkout
+  checkou = checkout
+  checout = checkout
+  cherrypick = cherry-pick
+  cloen = clone
+  comit = commit
+  comitt = commit
+  committ = commit
+  dif = diff
+  fetc = fetch
+  fethc = fetch
+  greo = grep
+  grp = grep
+  grpe = grep
+  hceckout = checkout
+  mereg = merge
+  merg = merge
+  rbanch = branch
+  stat = status
+  statis = status
+  stats = status
+  statsu = status
+  statsus = status
+  statu = status
+  statys = status
+  stauts = status
+  sttus = status
+  submodules = submodule
+  tags = tag
+
+# Per-machine settings: work identity, signing key, editor. Last, so it wins.
+[include]
+  path = ~/.gitconfig_local

@@ -1,0 +1,9 @@
+# Files fetched, not copied (docs/architecture.md). `chezmoi apply` downloads each one
+# when it's missing or older than refreshPeriod.
+
+# GitAlias: a large shared alias list, included near the top of ~/.gitconfig so the
+# repo's own aliases win on a name clash. Replaces the old download in dotfile-install.sh.
+[".config/gitalias/gitalias.txt"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/GitAlias/gitalias/main/gitalias.txt"
+  refreshPeriod = "168h"
