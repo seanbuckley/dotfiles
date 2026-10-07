@@ -152,10 +152,12 @@ jobs:
         run: |
           git ls-files -z -- '*.md' ':!:legacy/**' \
             | xargs -0 "$RUNNER_TEMP/lychee" --offline --include-fragments --no-progress
+      # The old repos stay private, so their links 404 for this token and for the public.
       - name: External links (weekly)
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git ls-files -z -- '*.md' ':!:legacy/**' \
-            | xargs -0 "$RUNNER_TEMP/lychee" --include-fragments --no-progress
+            | xargs -0 "$RUNNER_TEMP/lychee" --include-fragments --no-progress \
+              --exclude 'github\.com/seanbuckley/dotfiles-(legacy|windows)'
