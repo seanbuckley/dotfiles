@@ -157,5 +157,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # --exclude: the old repos (dotfiles-legacy, dotfiles-windows) stay private, so
+          # links to them 404 for this token and for the public. They're pointers for Sean.
           git ls-files -z -- '*.md' ':!:legacy/**' \
-            | xargs -0 "$RUNNER_TEMP/lychee" --include-fragments --no-progress
+            | xargs -0 "$RUNNER_TEMP/lychee" --include-fragments --no-progress \
+              --exclude 'github\.com/seanbuckley/dotfiles-(legacy|windows)'
