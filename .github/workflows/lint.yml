@@ -40,6 +40,25 @@ jobs:
           if [ "${#files[@]}" -eq 0 ]; then echo "No shell scripts yet."; exit 0; fi
           shellcheck "${files[@]}"
           "$RUNNER_TEMP/shfmt" -d -i 2 -ci "${files[@]}"
+      - name: Editor selection (home/dot_config/shell/env.sh)
+        run: |
+          # Fake editors on a minimal PATH; `command -v` is a shell builtin.
+          bin="$RUNNER_TEMP/fake"
+          mkdir -p "$bin/micro" "$bin/nano"
+          printf '#!/bin/sh\n' > "$bin/micro/micro"
+          printf '#!/bin/sh\n' > "$bin/nano/nano"
+          chmod +x "$bin/micro/micro" "$bin/nano/nano"
+          check() { # PATH, preset EDITOR (may be empty), expected "EDITOR VISUAL"
+            got=$(env -i PATH="$1" ${2:+EDITOR="$2"} /bin/sh -c '. home/dot_config/shell/env.sh; echo "$EDITOR $VISUAL"')
+            if [ "$got" != "$3" ]; then
+              echo "::error::PATH=$1 EDITOR=$2: got '$got', want '$3'"
+              exit 1
+            fi
+          }
+          check "$bin/micro:$bin/nano" "" "micro micro"
+          check "$bin/nano" "" "nano nano"
+          check "$bin/none" "" "vi vi"
+          check "$bin/micro" "nvim" "nvim nvim"
 
   powershell:
     runs-on: ubuntu-latest
@@ -221,6 +240,12 @@ jobs:
           # ~/.gitconfig_local must be the last include, so local settings win.
           git config --file "$HOME/.gitconfig" --get-all include.path | tail -n 1 \
             | grep -qx '~/.gitconfig_local'
+          # Shell env is Unix-only until Phase 4 brings the PowerShell side.
+          if [ "$RUNNER_OS" = Windows ]; then
+            test ! -e "$HOME/.config/shell/env.sh"
+          else
+            test -f "$HOME/.config/shell/env.sh"
+          fi
           git aliases | grep '^alias\.whoami ' > /dev/null # not -q: an early exit can SIGPIPE git under pipefail
           # Global ignore: OS/editor junk only, never project files.
           git init -q "$RUNNER_TEMP/ignore-test"

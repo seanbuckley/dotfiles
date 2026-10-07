@@ -10,12 +10,12 @@
 | Field | Value |
 |---|---|
 | Phase | **2 Shared core** in progress |
-| Active task | P2.03 global git ignore |
-| Last verified step | #12, #13 merged. Global ignore applied in a throwaway home: `.DS_Store` ignored, `a.png` and `.env` not (CI: Linux + Windows) |
-| Next step | P2.04 editor |
-| Open PRs | P2.03 global git ignore |
+| Active task | P2.04 editor (PR open) |
+| Last verified step | #14 merged. `env.sh` picks micro, nano, then vi, and keeps a preset `EDITOR` (dash, locally) |
+| Next step | P2.05 work git identity |
+| Open PRs | P2.04 editor |
 | Blockers | None |
-| Waiting on Sean | Review P2.03 |
+| Waiting on Sean | Review P2.04 |
 
 ## How to resume (for any agent)
 
@@ -81,3 +81,5 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-07 · Sean · P2.02 · Merged #12 (one git config). New rule: no claude.ai links in this repo (AGENTS.md).
 - 2026-10-07 · Sean · meta · Merged #13 (no claude.ai links).
 - 2026-10-07 · agent · P2.03 · `home/dot_config/git/ignore`, OS and editor junk only; CI checks `.DS_Store` is ignored and `a.png`, `.env` aren't.
+- 2026-10-07 · Sean · P2.03 · Merged #14 (global git ignore; curated `.vscode`, no `.idea`).
+- 2026-10-07 · agent · P2.04 · `home/dot_config/shell/env.sh`: `EDITOR`/`VISUAL` micro → nano → vi, preset wins; Unix-only; CI tests the choice.
