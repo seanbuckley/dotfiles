@@ -264,19 +264,67 @@ Comment standard (applies to both repos):
 
 ---
 
-## Phase 2: Shared core → v0.2.0 (outline)
+## Phase 2: Shared core → v0.2.0
 
-Detail these tasks at the start of the phase.
+Nothing in this phase touches a real machine until P2.06. Each task is one PR on the session branch.
+CI renders and dry-runs the source on `ubuntu-latest` and `windows-latest` from P2.01 on.
 
-- P2.01 chezmoi skeleton:
-  - `.chezmoiroot` → `home/`
-  - `home/.chezmoi.toml.tmpl` (variables in [architecture.md](architecture.md#variables))
-  - `home/.chezmoiignore` (OS gating)
-  - CI runs `chezmoi apply --dry-run` in `ubuntu-latest` + `windows-latest`
-- P2.02 `dot_gitconfig.tmpl`, merged from both legacy copies: include `~/.gitconfig_local`; delta; gitalias via `.chezmoiexternal`; OS-specific credential helper; no `core.editor`.
-- P2.03 Global git ignore: `dot_config/git/ignore`, trimmed to OS/editor junk only (fixes [#89](https://github.com/seanbuckley/dotfiles-legacy/issues/89)).
-- P2.04 Editor: `EDITOR`/`VISUAL` logic (micro → nano) in a shared env snippet.
-- P2.05 Conditional work identity (`includeIf`, [#66](https://github.com/seanbuckley/dotfiles-legacy/issues/66)), read from local data. No work details in the repo.
+### P2.01 chezmoi skeleton
+- Owner: agent
+- Files:
+  - `.chezmoiroot` → `home`
+  - `home/.chezmoiversion` → minimum chezmoi version (2.73.0, current at writing)
+  - `home/.chezmoi.toml.tmpl`: the four questions from [architecture.md](architecture.md#variables) (`profile`, `name`, `email`, `codeDir`), each reading its `DOTFILES_*` env var first, then `promptStringOnce` with a default; plus the derived `osID`, `isWSL`, `isOmarchy`
+  - `home/.chezmoiignore`: OS gating stubs (empty sections for Windows-only and Linux-only paths)
+  - `.github/workflows/lint.yml`: new `chezmoi` job (matrix `ubuntu-latest`, `windows-latest`): install the pinned chezmoi, `chezmoi init --promptDefaults --source .` into a throwaway `HOME`, then `chezmoi apply --dry-run --verbose` and `chezmoi data`
+- Validation: the new job is green on both runners; `chezmoi execute-template` on the config template locally; existing jobs still green.
+- Rollback: revert the PR. Nothing is applied anywhere yet.
+- ★ Sean: add `chezmoi (ubuntu-latest)` and `chezmoi (windows-latest)` to the `main` ruleset's required checks after merge.
+
+### P2.02 One git config
+- Owner: agent
+- File: `home/dot_gitconfig.tmpl` → `~/.gitconfig`. Not `~/.config/git/config`: `git config --global` and tools like `gh` write to `~/.gitconfig`, which would shadow the XDG file.
+- Content, merged from both `legacy/*/.gitconfig`:
+  - `[user]` from the `name` / `email` data (defaults: Sean Buckley, the noreply address)
+  - the shared `[alias]` block, kept as-is, except the three that hard-coded `master`: replaced per [decisions.md](decisions.md#git-aliases-that-hard-coded-master-2026-10-07) (`main`, default-branch `sync`, `undopush` on `main`)
+  - gitalias pulled by `home/.chezmoiexternal.toml` (weekly refresh) and included, replacing the old symlink
+  - `delta` as pager and `interactive.diffFilter` only when `lookPath "delta"` finds it; `git-lfs` filter only when `git-lfs` is installed
+  - credentials: `gh auth git-credential` for github.com and gist.github.com when `gh` is installed; otherwise the OS default (GCM on Windows)
+  - kept: `merge.conflictStyle=zdiff3`, `pull.rebase`, `rebase.autoStash/autoSquash`, `rerere`, `init.defaultBranch=main`
+  - added from [research.md](research.md) (git core devs): the 14 safe defaults, one line each with a comment
+  - removed: `core.editor` (D10), the old `[color]` block (defaults since git 1.8.4)
+  - last line: `[include] path = ~/.gitconfig_local`, so a local file always wins
+- Validation: rendered file parses (`git config --file <rendered> --list`) on both CI runners; PR body lists every setting added, changed or dropped against each legacy copy.
+- Rollback: revert the PR. On a machine that already applied it: `chezmoi forget ~/.gitconfig` and restore `~/.gitconfig.pre-chezmoi` (P2.06 makes that backup).
+
+### P2.03 Global git ignore
+- Owner: agent
+- File: `home/dot_config/git/ignore` → `~/.config/git/ignore`, git's default global ignore path on every OS, so no `core.excludesFile` is needed.
+- Content: OS and editor junk only (`.DS_Store`, `Thumbs.db`, `desktop.ini`, `*~`, `*.swp`, `.idea/`, `.vscode/`, `*.local`, `audit-words.txt`). No images, `dist/` or `.env`. Fixes [dotfiles-legacy#89](https://github.com/seanbuckley/dotfiles-legacy/issues/89).
+- Validation: CI renders it; a test in the job checks that `git check-ignore` ignores `x/.DS_Store` and does **not** ignore `x/a.png` or `x/.env`.
+- Rollback: revert the PR.
+
+### P2.04 Editor
+- Owner: agent
+- File: `home/dot_config/shell/env.sh`: POSIX sh, sets `EDITOR`/`VISUAL` to `micro` if on PATH, else `nano`, without overriding a value the user already set (so `EDITOR=nvim` in a `.local` file wins, D10).
+- Not sourced by anything until Phase 3 wires zsh/bash to it; the PowerShell side lands in Phase 4.
+- Validation: shellcheck + shfmt (existing `shell` job); a CI test sources it with and without `micro` on PATH and with `EDITOR` preset.
+- Rollback: revert the PR.
+
+### P2.05 Work git identity
+- Owner: agent
+- `home/dot_gitconfig.tmpl` gains one `[includeIf "gitdir:<dir>/"] path = ~/.gitconfig_work` per entry in a `workGitDirs` list. The list lives only in the machine's `~/.config/chezmoi/chezmoi.toml` (`[data]`), never in the repo; empty by default, so the block renders to nothing.
+- `~/.gitconfig_work` (work name, email, signing key) is created by Sean per machine. The repo never creates it.
+- Closes [dotfiles-legacy#66](https://github.com/seanbuckley/dotfiles-legacy/issues/66) at cutover.
+- Validation: CI renders with an empty list and with a sample `workGitDirs = ["/tmp/work"]`; `git config --file` parses both.
+- Rollback: revert the PR.
+
+### P2.06 Dry run on real machines ★
+- Owner: Sean (agent writes the exact commands in [bootstrap.md](bootstrap.md))
+- On WSL and on Windows: back up `~/.gitconfig` to `~/.gitconfig.pre-chezmoi`, then `chezmoi init --source <checkout>` and `chezmoi diff`. Read the diff; apply only if it looks right, or skip applying until Phase 6.
+- Expected result: the diff matches the PR descriptions; no surprises.
+- Stop if: the diff changes anything not described, or chezmoi prompts when it shouldn't.
+- Gate: tick **2**, then tag `v0.2.0` (tag only, no release).
 
 ## Phase 3: Linux → v0.3.0 (outline)
 
