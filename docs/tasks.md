@@ -286,7 +286,7 @@ CI renders and dry-runs the source on `ubuntu-latest` and `windows-latest` from 
 - File: `home/dot_gitconfig.tmpl` → `~/.gitconfig`. Not `~/.config/git/config`: `git config --global` and tools like `gh` write to `~/.gitconfig`, which would shadow the XDG file.
 - Content, merged from both `legacy/*/.gitconfig`:
   - `[user]` from the `name` / `email` data (defaults: Sean Buckley, the noreply address)
-  - the shared `[alias]` block, kept as-is; the three that hard-code `master` (`master`, `sync`, `undopush`) listed in the PR for Sean to keep, fix or drop
+  - the shared `[alias]` block, kept as-is, except the three that hard-coded `master`: replaced per [decisions.md](decisions.md#git-aliases-that-hard-coded-master-2026-10-07) (`main`, default-branch `sync`, `undopush` on `main`)
   - gitalias pulled by `home/.chezmoiexternal.toml` (weekly refresh) and included, replacing the old symlink
   - `delta` as pager and `interactive.diffFilter` only when `lookPath "delta"` finds it; `git-lfs` filter only when `git-lfs` is installed
   - credentials: `gh auth git-credential` for github.com and gist.github.com when `gh` is installed; otherwise the OS default (GCM on Windows)

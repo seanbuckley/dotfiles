@@ -66,6 +66,26 @@ What removing Oh My Zsh costs, plugin by plugin, from the current `.zshrc:80-110
 **Fallback:** if the usage check shows heavy reliance on OMZ, keep OMZ loaded via
 `.chezmoiexternal` with a short plugin list, and revisit after v1.
 
+## Git aliases that hard-coded `master` (2026-10-07)
+
+The old `.gitconfig` had three aliases that hard-code `master`. Sean's call, applied in P2.02:
+
+```ini
+[alias]
+  # was `checkout master`
+  main = checkout main
+  # was hard-coded to master; now uses upstream's default branch, so it works in master and main repos
+  sync = "!f() { git fetch upstream -v && git fetch origin -v && git remote set-head upstream --auto >/dev/null && b=$(git symbolic-ref --short refs/remotes/upstream/HEAD) && b=${b#upstream/} && git checkout \"$b\" && git merge \"upstream/$b\"; }; f"
+  # was `push -f origin HEAD^:master`; --force-with-lease refuses if the remote moved since your last fetch
+  undopush = push --force-with-lease origin HEAD^:main
+```
+
+- `undopush` only works on branches with no force-push protection. This repo's `main` ruleset blocks
+  non-fast-forward pushes, and admins can bypass it only through a PR, so `undopush` is rejected here.
+  Undo a commit on a protected `main` with a revert PR instead.
+- Tested in throwaway repos: `sync` on a `master` fork and a `main` fork, `undopush` on an unprotected
+  remote, and `undopush` refusing a stale lease.
+
 ## Commit convention
 
 Same Core rules as Sean's other (private) repos:

@@ -74,3 +74,4 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-07 · Sean · P1.06 · Full `AUDIT_WORDS` in both secrets; audit checklist ticked (#7); repo made public; secret scanning and push protection on; `v0.1.0` Baseline released. Gate 1 done.
 - 2026-10-07 · Sean · Gate 1 · Go-ahead for Phase 2.
 - 2026-10-07 · agent · Phase 2 · Detailed P2.01–P2.06 in tasks.md.
+- 2026-10-07 · agent · P2.02 prep · Recorded Sean's call on the `master` aliases in decisions.md (`main`, default-branch `sync`, `undopush` on `main`).
