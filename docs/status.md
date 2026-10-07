@@ -65,5 +65,5 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-05 · Sean · P0e.02 · chezmoi spike done on WSL and Windows. Works; reservation about one more abstraction layer (see decisions.md).
 - 2026-10-05 · Sean · P0e.03–04 · Repointed clones (one retired machine skipped); renamed to `dotfiles-legacy`; created the new repo with an empty first commit; gate 0e done.
 - 2026-10-05 · agent · P1.01 · Snapshot PR #1: 58 files, gitleaks clean, private repo names removed after Sean's word-list run.
-- 2026-10-07 · Sean · P1.01 · Merged #1. D10 editor (micro → nano, neovim installed) confirmed unchanged.
+- 2026-10-07 · Sean · P1.01 · Merged #1. D10 editor: micro → nano stays the default; neovim per machine via a one-line local override (option B).
 - 2026-10-06 · agent · P1.02 · Moved `docs/` here, scrubbed private repo names and hostnames, fixed old issue links to `dotfiles-legacy`; added the private-words layer to security.md and P1.03.
