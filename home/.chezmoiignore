@@ -1,0 +1,9 @@
+{{- /* OS gating: paths listed under an OS block are skipped on every other OS. */ -}}
+
+{{ if ne .chezmoi.os "windows" }}
+# Windows-only paths
+{{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+# Linux-only paths
+{{ end }}

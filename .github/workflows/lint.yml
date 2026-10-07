@@ -22,6 +22,7 @@ env:
   SHFMT_VERSION: 3.14.1
   EC_VERSION: 3.4.0
   LYCHEE_VERSION: 0.20.1
+  CHEZMOI_VERSION: 2.73.0 # keep in step with home/.chezmoiversion
 
 jobs:
   shell:
@@ -162,3 +163,53 @@ jobs:
           git ls-files -z -- '*.md' ':!:legacy/**' \
             | xargs -0 "$RUNNER_TEMP/lychee" --include-fragments --no-progress \
               --exclude 'github\.com/seanbuckley/dotfiles-(legacy|windows)'
+
+  chezmoi:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install chezmoi
+        run: |
+          case "$RUNNER_OS" in
+            Linux) asset="chezmoi_${CHEZMOI_VERSION}_linux_amd64.tar.gz" ;;
+            Windows) asset="chezmoi_${CHEZMOI_VERSION}_windows_amd64.zip" ;;
+          esac
+          base="https://github.com/twpayne/chezmoi/releases/download/v${CHEZMOI_VERSION}"
+          cd "$RUNNER_TEMP"
+          curl -fsSLO "$base/$asset"
+          curl -fsSLO "$base/chezmoi_${CHEZMOI_VERSION}_checksums.txt"
+          grep " ${asset}\$" "chezmoi_${CHEZMOI_VERSION}_checksums.txt" | sha256sum -c -
+          mkdir -p bin
+          case "$asset" in
+            *.zip) unzip -q -o "$asset" chezmoi.exe -d bin ;;
+            *) tar -xzf "$asset" -C bin chezmoi ;;
+          esac
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      - name: Init, dry run and data
+        run: |
+          # Throwaway home, so nothing touches the runner's profile.
+          export HOME="$RUNNER_TEMP/home" USERPROFILE="$RUNNER_TEMP/home"
+          mkdir -p "$HOME"
+          chezmoi --version
+          chezmoi init --promptDefaults --source .
+          chezmoi apply --dry-run --verbose --source .
+          chezmoi data --source . --format json > "$RUNNER_TEMP/data.json"
+          jq '{profile, name, email, codeDir, osID, isWSL, isOmarchy}' "$RUNNER_TEMP/data.json"
+          jq -e '.profile == "workstation" and .name == "Sean Buckley"' "$RUNNER_TEMP/data.json"
+      - name: Env overrides win over defaults
+        run: |
+          export HOME="$RUNNER_TEMP/home" USERPROFILE="$RUNNER_TEMP/home"
+          DOTFILES_PROFILE=minimal DOTFILES_CODE_DIR=ci-code-dir chezmoi init --promptDefaults --source .
+          chezmoi data --source . --format json \
+            | jq -e '.profile == "minimal" and .codeDir == "ci-code-dir"'
+          if DOTFILES_PROFILE=bogus chezmoi init --promptDefaults --source . 2>/dev/null; then
+            echo "::error::An unknown DOTFILES_PROFILE was accepted."
+            exit 1
+          fi

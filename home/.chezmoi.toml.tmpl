@@ -1,0 +1,54 @@
+{{- /*
+  chezmoi config, rendered once by `chezmoi init` into ~/.config/chezmoi/chezmoi.toml.
+  Variables: docs/architecture.md#variables. Each question reads its DOTFILES_* env var
+  first, then asks once; `--promptDefaults` takes the default, so CI never prompts.
+*/ -}}
+
+{{- $profiles := list "workstation" "minimal" -}}
+{{- $profile := env "DOTFILES_PROFILE" -}}
+{{- if not $profile -}}
+{{-   $profile = promptChoiceOnce . "profile" "Profile" $profiles "workstation" -}}
+{{- end -}}
+{{- if not (has $profile $profiles) -}}
+{{-   fail (printf "profile must be one of %s, got %q" (join ", " $profiles) $profile) -}}
+{{- end -}}
+
+{{- $name := env "DOTFILES_NAME" -}}
+{{- if not $name -}}
+{{-   $name = promptStringOnce . "name" "Git name" "Sean Buckley" -}}
+{{- end -}}
+
+{{- $email := env "DOTFILES_EMAIL" -}}
+{{- if not $email -}}
+{{-   $email = promptStringOnce . "email" "Git email" "seanbuckley@users.noreply.github.com" -}}
+{{- end -}}
+
+{{- $codeDir := env "DOTFILES_CODE_DIR" -}}
+{{- if not $codeDir -}}
+{{-   $codeDir = promptStringOnce . "codeDir" "Code folder" (joinPath .chezmoi.homeDir "code") -}}
+{{- end -}}
+
+{{- /* Derived, never asked. */ -}}
+{{- $osID := .chezmoi.os -}}
+{{- $isWSL := false -}}
+{{- $isOmarchy := false -}}
+{{- if eq .chezmoi.os "linux" -}}
+{{-   if hasKey .chezmoi "osRelease" -}}
+{{-     $osID = .chezmoi.osRelease.id -}}
+{{-   end -}}
+{{-   if hasKey .chezmoi "kernel" -}}
+{{-     $isWSL = .chezmoi.kernel.osrelease | lower | contains "microsoft" -}}
+{{-   end -}}
+{{-   if stat (joinPath .chezmoi.homeDir ".local/share/omarchy") -}}
+{{-     $isOmarchy = true -}}
+{{-   end -}}
+{{- end -}}
+
+[data]
+  profile = {{ $profile | quote }}
+  name = {{ $name | quote }}
+  email = {{ $email | quote }}
+  codeDir = {{ $codeDir | quote }}
+  osID = {{ $osID | quote }}
+  isWSL = {{ $isWSL }}
+  isOmarchy = {{ $isOmarchy }}
