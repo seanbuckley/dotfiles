@@ -7,3 +7,8 @@
 {{ if ne .chezmoi.os "linux" }}
 # Linux-only paths
 {{ end }}
+
+{{ if eq .chezmoi.os "windows" }}
+# Unix-only paths (Linux, WSL, macOS); PowerShell gets its own in Phase 4
+.config/shell
+{{ end }}
