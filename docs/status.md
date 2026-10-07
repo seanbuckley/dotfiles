@@ -10,12 +10,12 @@
 | Field | Value |
 |---|---|
 | Phase | **2 Shared core** in progress |
-| Active task | P2.02 one git config (PR open) |
+| Active task | P2.03 global git ignore |
 | Last verified step | P2.01 merged (#11). Rendered `~/.gitconfig` applies, parses and runs aliases in a throwaway home (Linux, chezmoi 2.73.0) |
 | Next step | P2.03 global git ignore |
-| Open PRs | P2.02 one git config |
+| Open PRs | AGENTS.md: no claude.ai links |
 | Blockers | None |
-| Waiting on Sean | Review P2.02's "for review" list; `chezmoi` required checks in the `main` ruleset if not added yet |
+| Waiting on Sean | Merge the AGENTS.md rule PR |
 
 ## How to resume (for any agent)
 
@@ -78,3 +78,4 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-07 · agent · P2.01 · chezmoi skeleton: `.chezmoiroot`, config template with `DOTFILES_*` overrides, OS-gating `.chezmoiignore`, `chezmoi` CI job on ubuntu + windows.
 - 2026-10-07 · Sean · P2.01 · Merged #9 (phase 2 task detail) and #11 (chezmoi skeleton).
 - 2026-10-07 · agent · P2.02 · `home/dot_gitconfig.tmpl` merged from both legacy copies; gitalias as a chezmoi external; CI applies and checks it.
+- 2026-10-07 · Sean · P2.02 · Merged #12 (one git config). New rule: no claude.ai links in this repo (AGENTS.md).

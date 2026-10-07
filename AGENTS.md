@@ -43,6 +43,8 @@ Propose the change in the PR body first.
   employer or tenant names, absolute user paths, private repo names. Rules:
   [security.md](docs/security.md).
 - Email: only the GitHub noreply address.
+- No claude.ai links (session, project or thread URLs) in files, commit messages or PR bodies.
+  Drop the `Claude-Session:` trailer; `Co-Authored-By` is fine.
 - Private values go in local files (`~/.gitconfig_local`, `*.local`, chezmoi config), never here.
 - The private-words CI job fails on a match and prints file names only. Fix the file; never print
   or commit the word list.
