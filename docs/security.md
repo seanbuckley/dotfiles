@@ -32,7 +32,7 @@ checking happens *before* the visibility flip, not after.
 
 Run by the agent, then reviewed by Sean.
 
-Last run 2026-10-07 on `main` (`ed84efb`, 82 files). Every item below except the last is done.
+Last run 2026-10-07 on `main` (`ed84efb`, 82 files). Every item below is done.
 
 - [x] `gitleaks detect --no-git --source .` → no findings (also every PR, in CI)
 - [x] `gitleaks detect --source .` (history of the new repo) → no findings (also every PR, in CI)
@@ -44,7 +44,7 @@ Last run 2026-10-07 on `main` (`ed84efb`, 82 files). Every item below except the
   - [x] names: Sean ran the word list locally (2026-10-05); CI's `private-words` job passed on `main` with the full list (2026-10-07). Private repo names were removed; Sean's own name, noreply email and `buckley.ca` are public on purpose
 - [x] No `Tabby/`, `.hyper.js`, legacy `Windows Terminal/settings.json` or `.vscode/` in `legacy/`
 - [x] `legacy/linux/scripts/repos-install.sh`: private repo names removed (Sean, 2026-10-05); only `seanbuckley/dotfiles` remains
-- [ ] Sean reads the whole `git ls-files` list once. The 58 `legacy/` files were listed in PR [#1](https://github.com/seanbuckley/dotfiles/pull/1) (legacy snapshot); the other 24 (root files, `.github/`, `docs/`) still need a read
+- [x] Sean reads the whole `git ls-files` list once (paths, to catch any file that shouldn't be here; contents are covered by the scans above). Done 2026-10-07: `legacy/` paths in PR [#1](https://github.com/seanbuckley/dotfiles/pull/1) (legacy snapshot), the other 24 in chat; Sean also skimmed `docs/` and `legacy/`
 
 ## Findings to date (2026-09-30)
 
