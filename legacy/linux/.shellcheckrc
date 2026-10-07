@@ -1,0 +1,12 @@
+# ~/.shellcheckrc: ShellCheck settings for this repo's scripts.
+# external-sources lets ShellCheck follow `source` lines; SC1091 (can't find a
+# sourced file) and SC2162 (read without -r) are silenced.
+# Note: despite the name above, dotfile-install.sh does not link this file into
+# $HOME. ShellCheck finds it here when run from the repo (`shellcheck scripts/*.sh`).
+# Fate: kept as the new repo's lint config (docs/testing.md).
+
+external-sources=true
+
+# Remove ShellCheck error SC1091
+disable=SC1091
+disable=SC2162

@@ -1,0 +1,237 @@
+#!/bin/sh
+#
+# ==============================================================================
+# ~/.aliases: personal aliases and small shell functions
+#
+# What:     Shortcuts for listing, navigation, safe file operations, system
+#           upgrade, git helpers, WSL helpers and docker compose.
+# Used by:  sourced near the end of ~/.zshrc (`source $HOME/.aliases`), so these
+#           override Oh My Zsh's aliases of the same name. The shebang above is
+#           only a hint for editors and ShellCheck; this file is never executed.
+# Platform: written for zsh on WSL. `alias -s` (suffix aliases) is zsh-only, and
+#           the WSL section assumes explorer.exe and VS Code on Windows.
+# Gotchas:  `rm` is aliased twice; the later `rm=trash` wins (see dotfiles#55).
+#           `upgrade` is one `&&` chain, so the first failing step silently
+#           skips everything after it (see docs/upgrades.md).
+# Fate:     split into a shared aliases file for zsh and bash, with WSL-only
+#           lines behind an isWSL check (docs/architecture.md).
+# ==============================================================================
+
+# Aliases
+#
+# References
+# https://github.com/paulirish/dotfiles/blob/master/.aliases
+
+# Make sudo use aliases, from https://askubuntu.com/a/22043/353466
+alias sudo='sudo '
+
+# Repeat last command with sudo
+# (`fc -nl -1` prints the previous command from history; zsh/bash only.)
+alias please='sudo $(fc -nl -1)'
+
+# Verbose in chmod & chown
+alias chmod='chmod -v'
+alias chown='chown -v'
+
+# List files
+# auto = colour only when printing to a terminal, so `ls | grep` and
+# `ls > file` get plain text instead of colour codes.
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+#alias lsa='ls -A' # existing ohmyzsh alias
+alias l='ls -CF'
+alias lsd='ls -l | grep "^d"' # only directories
+
+# Eza
+alias eza='eza -l --group-directories-first --icons --git --header --color=always'
+alias ezatree='eza --tree --level=2 --color=always --git --header --icons=auto'
+
+# Easier navigation: .., ..., ~ and -
+# alias .='pwd'
+alias ..='cd ..'
+alias cd..='cd ..'
+alias ...='cd ../..'
+alias 2..='cd ../..'
+alias ....='cd ../../..'
+alias 3..='cd ../../..'
+alias .....='cd ../../../..'
+alias 4..='cd ../../../..'
+alias ......='cd ../../../../..'
+alias 5..='cd ../../../../..'
+alias ~='cd ~' # `cd` is probably faster to type though
+alias -- -='cd -'
+
+# mv, rm, cp
+# -i asks before each delete; -v prints what happened. Note `rm` is redefined
+# further down as `trash`, and the later definition is the one that counts.
+alias mv='mv -v'
+alias rm='rm -i -v'
+alias cp='cp -v'
+
+# fzf
+alias fzf='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
+
+# New Files
+
+## Make and enter a directory
+## Converted alias to function as per ShellCheck SC2142. SeeL https://www.shellcheck.net/wiki/SC2142
+## alias mkcd='foo(){ mkdir -p "$1"; cd "$1" }; foo '
+# `&&` skips the cd if mkdir failed. `return` (not `exit`) leaves the terminal
+# open if the cd fails. `--` lets names that start with a dash work.
+mkcd() { mkdir -p -- "$1" && cd -- "$1" || return; }
+##mkcd() { mkdir -p "$1" && cd "$1"; }
+
+# new <mode> <file>: create a file, set its permissions, open it in $EDITOR.
+# The helpers below are shortcuts for common modes.
+new() { touch "$2" && chmod "$1" "$2" && $EDITOR "$2"; }
+newfile() { new 700 "$1"; }
+new700() { new 700 "$1"; }
+new750() { new 750 "$1"; }
+new755() { new 755 "$1"; }
+newxfile() { new +x "$1"; }
+newsh() { echo "#!/bin/bash" > "$1".sh && newxfile "$1".sh; }
+
+# Config files
+alias zshconfig='nano ~/.zshrc'
+alias ohmyzsh='nano ~/.oh-my-zsh'
+
+# Reload terminal
+# alias reload='source ~/.zshrc'
+# Apparenlty this way is better:
+alias reload='exec zsh -l'
+
+# Show machine IP
+alias myip='curl http://ipecho.net/plain; echo'
+
+# Print color map
+# Refectored alias due to Shell Check SC2154. See https://www.shellcheck.net/wiki/SC2154
+# alias colormap="for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done"
+# Note: %K/%F are zsh *prompt* escapes. printf prints them literally, so this
+# shows codes rather than colours; zsh's `print -P` would render them.
+colormap() {
+    i=0
+    while [ $i -le 255 ]; do
+        printf "%s" "%K{$i}  %k%F{$i}"
+        printf "%03d" "$i"
+        printf "%s" "%f "
+        if [ $((i % 6)) -eq 3 ]; then
+            printf "\n"
+        fi
+        i=$((i+1))
+    done
+}
+
+# Info on current distro
+alias distro='cat /etc/*-release'
+
+# Recursively delete `.DS_Store` files
+alias cleanup_dsstore='find . -name "*.DS_Store" -type f -ls -delete'
+
+# Install & Uninstall
+# These aliases were removed as they conflict with the standard `install` utility
+#alias install='sudo apt install'
+#alias uninstall='sudo apt remove --purge'
+
+# System update & upgrade
+# One `&&` chain: each step only runs if the one before it succeeded, so a
+# failure early on (e.g. brew missing) silently skips everything after it.
+# `apt autoremove` has no -y, so it stops to ask. `omz update` only works in
+# an interactive zsh. The new design is in docs/upgrades.md.
+# brew upgrade updates the Homebrew-only tools (eza, sd, yq, lazygit, zoxide); it
+# runs brew update itself first.
+# vp upgrade updates vite-plus itself, before it updates Node and the global packages.
+# vp env install lts fetches the newest LTS Node; the default set by
+# scripts/node-install.sh ("lts") then picks it up in new shells.
+alias upgrade='sudo apt update && sudo apt -y upgrade && sudo apt autoremove && brew upgrade && vp upgrade && vp env install lts && vp update -g && omz update'
+# Removed NVM calls from the above alias (in favour of vite-plus): && nvm install node && nvm use node && npm update -g
+
+# Startup a server in your current directory (no npm packages required)
+alias server='python3 -m http.server 8000'
+
+# Dotfile Helpers
+# Update dotfiles from local repo
+alias upgradedot='cd ~/code/dotfiles/scripts && bash dotfile-install.sh && exec zsh'
+# Purge dot file backups (created by runing scripts/dotfile-install.sh)
+alias cleandot='find ~ -maxdepth 1 -type f -name ".*.2*-*-*-*" -delete'
+
+# Typos
+alias sl='ls'
+alias ,,='cd ..'
+alias ..l='cd .. && ls'
+alias :q='exit'
+alias gut='git'
+alias mdkir='mkdir'
+alias npmi='npm i'
+alias npmt='npm t'
+alias sudp='sudo'
+alias snippet='snippets'
+
+# Use trash-cli instead of rm
+# Overrides the `rm -i -v` alias above. trash-cli's authors advise against
+# aliasing rm (dotfiles#55); two different `trash` commands are installed, from
+# apt and from npm, and PATH order decides which one runs (dotfiles#92).
+alias rm=trash
+
+# --- Git Aliases ---
+# For more git aliases, see the .gitconfig file
+
+# Git pull upstrean master
+alias gum='git pull upstream master'
+
+# Git pull all sub directories
+# Run it from a folder of checkouts (e.g. ~/code): it pulls every direct
+# sub-folder that is a git repo, one after another.
+glall() {
+  for dir in */; do
+      if [ -d "$dir/.git" ]; then
+          echo "Updating $dir"
+          (cd "$dir" && git pull)
+      fi
+  done
+}
+
+# Changed your .gitignore _after_ you have added / committed some files?
+# run `gri` to untrack anything in your updated .gitignore
+# (-z/-0 keep odd file names intact; --cached keeps the files on disk.)
+alias gri='git ls-files -z --cached --ignored --exclude-standard | xargs -0 -r git rm --cached -r --'
+
+# Delete all local branches that have been merged into master
+# Ref: https://spencer.wtf/2026/02/20/cleaning-up-merged-git-branches-a-one-liner-from-the-cias-leaked-dev-docs.html
+alias gbdmmb='git branch --merged origin/main | grep -vE "^\s*(\*|main|develop)" | xargs -n 1 git branch -d'
+
+# --- Git Suffix Aliases ---
+# `alias -s ext=cmd` is a zsh feature: typing a word ending in .ext runs cmd on it.
+# Clone .git repo by just typing the URL
+alias -s git='git clone'
+
+# --- WSL Aliases ---
+# These only make sense inside WSL (explorer.exe and VS Code live on Windows),
+# but they are defined on every machine that uses this file.
+alias open='explorer.exe'
+
+# --- WSL Suffix Aliases ---
+# Open these files in VS Code without typing the `code` command. Just type the filename.
+alias -s azcli=code
+alias -s ps1=code
+alias -s md=code
+alias -s json=code
+alias -s cs=code
+alias -s ts=code
+alias -s html=code
+
+# --- Docker Compose Aliases ---
+# Assumes docker-compose.yml file is in home directory
+
+alias dcup='docker-compose -f ~/docker-compose.yml up -d' #brings up all containers if one is not defined after dcup
+alias dcdown='docker-compose -f ~/docker-compose.yml stop' #brings down all containers if one is not defined after dcdown
+alias dcpull='docker-compose -f ~/docker-compose.yml pull' #pulls all new images unless one is specified
+alias dclogs='docker-compose -f ~/docker-compose.yml logs -tf --tail="50" '
+
+# Converted alias to function as per ShellCheck SC2142. SeeL https://www.shellcheck.net/wiki/SC2142
+# alias dtail='docker logs -tf --tail="50" "$@" '
+dtail(){ docker logs -tf --tail="50" "$@"; }
+
+# --- Miscellaneous Aliases ---
+# Timer
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'

@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "@commitlint/config-conventional"
+  ],
+  "rules": {
+    "scope-enum": [
+      2,
+      "always",
+      [
+        "aliases",
+        "git",
+        "scripts",
+        "zsh",
+        "brew",
+        "apt",
+        "npm",
+        "docs",
+        "config",
+        "wsl",
+        "p10k",
+        "todo"
+      ]
+    ]
+  }
+}
