@@ -12,10 +12,10 @@
 | Phase | **1 Baseline** (in progress) |
 | Active task | P1.03 CI quality gates |
 | Last verified step | P1.02 merged as [#2](https://github.com/seanbuckley/dotfiles/pull/2) |
-| Next step | ★ Sean adds the `AUDIT_WORDS` secret (Actions + Dependabot); CI green; then P1.04 labels and branch protection |
+| Next step | P1.04 labels and branch protection (★ Sean) |
 | Open PRs | P1.03 `lint.yml` (this change) |
 | Blockers | None |
-| Waiting on Sean | `AUDIT_WORDS` secret; review the P1.03 PR |
+| Waiting on Sean | Review the P1.03 PR; confirm the Dependabot copy of `AUDIT_WORDS` |
 
 ## How to resume (for any agent)
 
@@ -68,4 +68,4 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-07 · Sean · P1.01 · Merged #1. D10 editor: micro → nano stays the default; neovim per machine via a one-line local override (option B).
 - 2026-10-06 · agent · P1.02 · Moved `docs/` here, scrubbed private repo names and hostnames, fixed old issue links to `dotfiles-legacy`; added the private-words layer to security.md and P1.03.
 - 2026-10-07 · Sean · P1.02 · Merged #2; vault link fix merged in the vault.
-- 2026-10-07 · agent · P1.03 · Added `lint.yml` (7 jobs) and Dependabot for Actions; all jobs run clean locally except private words (needs the secret).
+- 2026-10-07 · agent · P1.03 · Added `lint.yml` (7 jobs) and Dependabot for Actions; all 7 jobs green on the PR, including private words with the Actions secret.
