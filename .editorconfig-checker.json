@@ -1,0 +1,6 @@
+{
+  "Exclude": ["^legacy/"],
+  "Disable": {
+    "IndentSize": true
+  }
+}

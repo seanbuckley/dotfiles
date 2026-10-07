@@ -70,7 +70,7 @@ repos) are kept in a word list that is **never committed**, not even encrypted.
 | CI check (P1.03) | GitHub Actions secret `AUDIT_WORDS` | Every PR, from any machine or agent. Prints matching file names only, so the public log never shows a word |
 | Local hook (Phase 2, parked) | `~/.config/dotfiles/audit-words.txt`, filled from Bitwarden | Blocks the commit before it happens; warns if the file is missing |
 
-To change the list: edit the Bitwarden note, then paste it into the Actions secret.
+To change the list: edit the Bitwarden note, then paste it into the `AUDIT_WORDS` secret under **both** Settings → Secrets → Actions and Settings → Secrets → Dependabot (Dependabot PRs can't read Actions secrets).
 
 ## Ongoing protection
 
