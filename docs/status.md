@@ -9,13 +9,13 @@
 
 | Field | Value |
 |---|---|
-| Phase | **1 Baseline** (in progress) |
-| Active task | None; waiting on Sean for P1.06 |
-| Last verified step | P1.05: the three private repos' Core line lists this repo (one-way); all merged |
-| Next step | ★ P1.06 go public and release v0.1.0 (after the full `AUDIT_WORDS` list) |
+| Phase | **1 Baseline** done; **2 Shared core** next |
+| Active task | None; gate 1 review with Sean before Phase 2 |
+| Last verified step | Repo public; `v0.1.0` Baseline released (tag on `8d80c73`, tip of `main`); secret scanning + push protection on |
+| Next step | P2.01 chezmoi skeleton (detail Phase 2 tasks first) |
 | Open PRs | Status update (this change) |
-| Blockers | **P1.06 is blocked** until `AUDIT_WORDS` (Actions + Dependabot) holds the full word list and CI is re-run green. Both copies hold a minimal temporary list today |
-| Waiting on Sean | Full `AUDIT_WORDS` list in both secrets, then re-run `lint` on `main` |
+| Blockers | None |
+| Waiting on Sean | Go-ahead for Phase 2 |
 
 ## How to resume (for any agent)
 
@@ -38,7 +38,7 @@
 | 0c Research reviewed | [x] | 2026-09-30 | [seanbuckley/dotfiles-legacy#117](https://github.com/seanbuckley/dotfiles-legacy/pull/117) merged |
 | 0d Issues triaged | [x] | 2026-09-30 | 32 closed, 48 labelled, [#118](https://github.com/seanbuckley/dotfiles-legacy/issues/118) opened |
 | 0e Repos prepared (`pre-merge-baseline`) | [x] | 2026-10-05 | Tags: legacy `eabd871`, windows `94578fb` (moved from `d737109`); old repo renamed `dotfiles-legacy`; new repo created |
-| 1 Baseline (v0.1.0) | [ ] | | |
+| 1 Baseline (v0.1.0) | [x] | 2026-10-07 | Public; [v0.1.0](https://github.com/seanbuckley/dotfiles/releases/tag/v0.1.0) released |
 | 2 Shared core (v0.2.0) | [ ] | | |
 | 3 Linux (v0.3.0) | [ ] | | |
 | 4 Windows (v0.4.0) | [ ] | | |
@@ -71,3 +71,4 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-07 · agent · P1.03 · Added `lint.yml` (7 jobs) and Dependabot for Actions; all 7 jobs green on the PR, including private words with the Actions secret.
 - 2026-10-07 · Sean · P1.03–04 · Merged #3. Labels and `main` ruleset created. `AUDIT_WORDS` set in Actions and Dependabot with a minimal temporary list; full list to follow.
 - 2026-10-07 · agent · P1.05 · Core line updated in the three private repos (one PR each), merged by Sean. #4 merged.
+- 2026-10-07 · Sean · P1.06 · Full `AUDIT_WORDS` in both secrets; audit checklist ticked (#7); repo made public; secret scanning and push protection on; `v0.1.0` Baseline released. Gate 1 done.

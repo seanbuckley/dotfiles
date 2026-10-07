@@ -253,7 +253,7 @@ Comment standard (applies to both repos):
 - Objective: the `AGENTS.md` of each private repo that shares the Core section lists `seanbuckley/dotfiles` too. The link runs one way only: this public repo never names those repos.
 - Expected result: one small PR per repo, `docs(meta): add dotfiles to the shared core list`.
 
-### P1.06 Go public and release v0.1.0 ★
+### P1.06 Go public and release v0.1.0 ★ ✅
 - Owner: Sean
 - Actions:
   1. Re-read [security.md](security.md) findings. Confirm both `AUDIT_WORDS` secrets hold the **full** word list (not a temporary one) and that the latest `lint` run on `main` used it and is green.
