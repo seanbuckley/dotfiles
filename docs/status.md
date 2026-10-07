@@ -11,11 +11,11 @@
 |---|---|
 | Phase | **2 Shared core** in progress |
 | Active task | P2.03 global git ignore |
-| Last verified step | P2.01 merged (#11). Rendered `~/.gitconfig` applies, parses and runs aliases in a throwaway home (Linux, chezmoi 2.73.0) |
-| Next step | P2.03 global git ignore |
-| Open PRs | AGENTS.md: no claude.ai links |
+| Last verified step | #12, #13 merged. Global ignore applied in a throwaway home: `.DS_Store` ignored, `a.png` and `.env` not (Linux) |
+| Next step | P2.04 editor |
+| Open PRs | P2.03 global git ignore |
 | Blockers | None |
-| Waiting on Sean | Merge the AGENTS.md rule PR |
+| Waiting on Sean | Review P2.03 |
 
 ## How to resume (for any agent)
 
@@ -79,3 +79,5 @@ Newest last. One line per session: `date · who · task · result`.
 - 2026-10-07 · Sean · P2.01 · Merged #9 (phase 2 task detail) and #11 (chezmoi skeleton).
 - 2026-10-07 · agent · P2.02 · `home/dot_gitconfig.tmpl` merged from both legacy copies; gitalias as a chezmoi external; CI applies and checks it.
 - 2026-10-07 · Sean · P2.02 · Merged #12 (one git config). New rule: no claude.ai links in this repo (AGENTS.md).
+- 2026-10-07 · Sean · meta · Merged #13 (no claude.ai links).
+- 2026-10-07 · agent · P2.03 · `home/dot_config/git/ignore`, OS and editor junk only; CI checks `.DS_Store` is ignored and `a.png`, `.env` aren't.

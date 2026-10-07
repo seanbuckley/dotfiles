@@ -1,0 +1,18 @@
+# Global git ignore: ~/.config/git/ignore, git's default path on every OS (no
+# core.excludesFile needed). OS and editor junk only. Anything a project should
+# ignore (build output, .env, images) belongs in that project's own .gitignore.
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+*~
+*.swp
+.idea/
+.vscode/
+
+# Local-only files (docs/security.md)
+*.local
+audit-words.txt
