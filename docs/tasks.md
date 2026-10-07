@@ -321,7 +321,7 @@ CI renders and dry-runs the source on `ubuntu-latest` and `windows-latest` from 
 
 ### P2.06 Dry run on real machines ★
 - Owner: Sean (agent writes the exact commands in [bootstrap.md](bootstrap.md))
-- On WSL and on Windows: back up `~/.gitconfig` to `~/.gitconfig.pre-chezmoi`, then `chezmoi init --source <checkout>` and `chezmoi diff`. Read the diff; apply only if it looks right, or skip applying until Phase 6.
+- On WSL and on Windows: back up `~/.gitconfig` to `~/.gitconfig.pre-chezmoi`, then `chezmoi init seanbuckley` (no `--apply`) and `chezmoi diff`. Exact commands: [bootstrap.md](bootstrap.md#phase-2-dry-run-p206). Read the diff; apply only if it looks right, or skip applying until Phase 6.
 - Expected result: the diff matches the PR descriptions; no surprises.
 - Stop if: the diff changes anything not described, or chezmoi prompts when it shouldn't.
 - Gate: tick **2**, then tag `v0.2.0` (tag only, no release).
